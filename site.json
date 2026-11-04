@@ -1,15 +1,15 @@
 {
   "_uitleg": "Algemene instellingen. Pas site_url aan naar je echte GitHub Pages-adres VOOR je de affiche print: de QR-code wordt hieruit gemaakt.",
 
-  "site_url": "https://afval-turnhout.github.io/",
+  "site_url": "https://heizijdse-velden.github.io/",
   "default_lang": "nl",
   "languages": ["nl", "en", "fr", "ar", "tr", "pl", "ro", "bg", "uk", "es"],
   "last_reviewed": "2026-11-04",
 
-  "_uitleg_vu": "Verplicht op gedrukte affiches/flyers (Belgisch recht): naam en woonplaats van de verantwoordelijke uitgever (meerderjarige inwoner van België). Vul in voor je print.",
-  "publisher": "",
+  "_uitleg_vu": "Verplicht op gedrukte affiches/flyers (Belgisch recht): naam en woonplaats van de verantwoordelijke uitgever (meerderjarige inwoner van België).",
+  "publisher": "Pieter Huycke",
 
-  "maintainer_email": "",
+  "maintainer_email": "burengroep.heizijdsevelden@proton.me",
 
   "contacts": {
     "containers": {
