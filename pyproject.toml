@@ -14,11 +14,10 @@ sitegen = "sitegen.cli:main"
 
 [dependency-groups]
 dev = [
+    "playwright>=1.55",
     "pytest>=8.4",
     "ruff>=0.14",
-]
-poster = [
-    "playwright>=1.55",
+    "zizmor>=1.16",
 ]
 
 [build-system]
@@ -37,3 +36,8 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = ["-m", "not external", "--strict-markers"]
+markers = [
+    "e2e: drives a real browser; needs `uv run playwright install chromium` (skipped if missing)",
+    "external: needs internet; checks external links (run with `uv run pytest -m external`)",
+]

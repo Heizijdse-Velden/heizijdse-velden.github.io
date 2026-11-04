@@ -9,6 +9,7 @@ from typing import Any
 from urllib.parse import urlparse
 
 REFERENCE_LANG = "nl"
+PER_LANGUAGE_LINKS = ("sorting_guides", "fostplus_sites")
 
 
 @dataclass
@@ -27,6 +28,14 @@ class Content:
     def base_path(self) -> str:
         """URL path the site is served from ('/' for user/org sites, '/repo/' for project sites)."""
         return urlparse(self.site["site_url"]).path or "/"
+
+
+def all_links(site: dict[str, Any]) -> list[tuple[str, str]]:
+    """Every external link in site.json as (name, url), e.g. ('links.mijndiftar', 'https://...')."""
+    pairs = [(f"links.{name}", url) for name, url in site["links"].items()]
+    for group in PER_LANGUAGE_LINKS:
+        pairs += [(f"{group}.{code}", url) for code, url in site[group].items()]
+    return pairs
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -97,15 +106,16 @@ def validate(content: Content) -> tuple[list[str], list[str]]:
             errors.append(f"{code}.dir must be 'ltr' or 'rtl'")
         if code != REFERENCE_LANG and lang.get("is_translation") is not True:
             errors.append(f"{code}.is_translation must be true")
-        if code not in site["sorting_guides"]:
-            errors.append(f"site.json: sorting_guides.{code} is missing")
+        for per_language in PER_LANGUAGE_LINKS:
+            if code not in site[per_language]:
+                errors.append(f"site.json: {per_language}.{code} is missing")
 
     url = site["site_url"]
     if not url.startswith("https://") or not url.endswith("/"):
         errors.append("site.json: site_url must start with https:// and end with /")
-    for name, link in {**site["links"], **site["sorting_guides"]}.items():
-        if not str(link).startswith("https://"):
-            errors.append(f"site.json: link '{name}' must start with https://")
+    for name, link in all_links(site):
+        if not link.startswith("https://"):
+            errors.append(f"site.json: {name} must start with https://")
     if not site.get("publisher", "").strip():
         warnings.append("site.json: 'publisher' (V.U.) is empty; it is required on printed posters.")
     return errors, warnings

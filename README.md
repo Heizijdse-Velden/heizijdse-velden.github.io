@@ -8,16 +8,11 @@ Live op **https://heizijdse-velden.github.io/**
 Vereist: [uv](https://docs.astral.sh/uv/).
 
 ```bash
-uv run sitegen serve    # bouwen + bekijken op http://localhost:8000
-uv run sitegen check    # enkel de teksten controleren
-uv run pytest           # tests
-```
-
-## Affiche (PDF)
-
-```bash
-uv run --group poster playwright install chromium   # eenmalig
-uv run --group poster sitegen poster                # → affiche.pdf
+uv run playwright install chromium   # eenmalig: voor browsertests en de affiche
+uv run sitegen serve                 # bouwen + bekijken op http://localhost:8000
+uv run pytest                        # alle tests (inhoud, HTML, browser)
+uv run pytest -m external            # werken de externe links nog? (draait ook wekelijks in CI)
+uv run sitegen poster                # affiche → affiche.pdf
 ```
 
 Scan de QR-code voor je print. De verantwoordelijke uitgever (V.U.: naam + adres) staat in `content/site.json`.
@@ -31,11 +26,10 @@ Scan de QR-code voor je print. De verantwoordelijke uitgever (V.U.: naam + adres
 | URL, contactgegevens, links, V.U. | `content/site.json` |
 
 Elke taal moet dezelfde sleutels hebben als `nl.json`. Zo niet, dan faalt de build en blijft de vorige versie online.
-Een taal toevoegen: kopieer `en.json`, vertaal, en voeg de code toe aan `languages` en `sorting_guides` in `site.json` (`"dir": "rtl"` voor Arabisch e.d.).
+Een taal toevoegen: kopieer `en.json`, vertaal, en voeg de code toe aan `languages`, `sorting_guides` en `fostplus_sites` in `site.json` (`"dir": "rtl"` voor Arabisch e.d.).
 
 ## Publiceren
 
-Push naar `main`: GitHub Actions lint, test, bouwt en publiceert.
-Eenmalig instellen: **Settings → Pages → Source: GitHub Actions**.
+Open een PR: GitHub Actions lint, auditeert de workflows (zizmor), test en bouwt. Na de merge naar `main` wordt de site gepubliceerd.
 
 Onderhoud, veiligheid en juridische aandachtspunten: [`docs/beheer.md`](docs/beheer.md).

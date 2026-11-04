@@ -1,10 +1,20 @@
 {
   "site_url": "https://heizijdse-velden.github.io/",
-  "languages": ["nl", "en", "fr", "ar", "tr", "pl", "ro", "bg", "uk", "es"],
+  "languages": [
+    "nl",
+    "en",
+    "fr",
+    "ar",
+    "tr",
+    "pl",
+    "ro",
+    "bg",
+    "uk",
+    "es"
+  ],
   "last_reviewed": "2026-11-04",
   "publisher": "Pieter Huycke",
   "maintainer_email": "burengroep.heizijdsevelden@proton.me",
-
   "contacts": {
     "containers": {
       "email": "ondergronds@iok.be",
@@ -17,7 +27,6 @@
       "phone_link": "+3214535353"
     }
   },
-
   "links": {
     "iok_containers": "https://www.iok.be/ondergrondse-containers",
     "iok_manual_pdf": "https://www.iok.be/sites/default/files/2025-10/handleiding%20ondergrondse%20containers.pdf",
@@ -26,7 +35,6 @@
     "iok_recyclagepark": "https://www.iok.be/afval/mijn-recyclagepark",
     "mijndiftar": "https://www.mijndiftar.be"
   },
-
   "sorting_guides": {
     "nl": "https://www.iok.be/afval/afval-sorteren",
     "en": "https://www.iok.be/brochure-nlfreng",
@@ -39,10 +47,21 @@
     "uk": "https://www.iok.be/brochure-nluken",
     "es": "https://www.iok.be/brochure-nlptes"
   },
-
+  "fostplus_sites": {
+    "nl": "https://www.betersorteren.be",
+    "en": "https://www.bettersorting.be",
+    "fr": "https://www.trionsmieux.be",
+    "ar": "https://www.bettersorting.be",
+    "tr": "https://www.bettersorting.be",
+    "pl": "https://www.bettersorting.be",
+    "ro": "https://www.bettersorting.be",
+    "bg": "https://www.bettersorting.be",
+    "uk": "https://www.bettersorting.be",
+    "es": "https://www.bettersorting.be"
+  },
   "dutch_terms": [
-    "welkom, bied je pas aan",
-    "pas geaccepteerd",
+    "Welkom, bied je pas aan.",
+    "Pas geaccepteerd.",
     "toegangspas",
     "restafval",
     "papier en karton",

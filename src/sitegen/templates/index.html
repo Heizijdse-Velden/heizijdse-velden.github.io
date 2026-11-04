@@ -18,6 +18,11 @@
     </ul>
   </div>
 
+  <p class="trust trust-home" role="note">
+    <span class="trust-icons" aria-hidden="true">{{ icon('nomoney') }}{{ icon('nodata') }}{{ icon('notrack') }}</span>
+    <span>{{ trust_nl }}<br><span lang="en">{{ trust_en }}</span></span>
+  </p>
+
   {# Verborgen suggesties; lang.js toont de suggestie die past bij de taal van de telefoon. Zonder JavaScript werkt de lijst hieronder gewoon. #}
   <div class="suggest-wrap">
     {% for l in langs %}<a class="suggest btn btn-primary" hidden data-lang="{{ l.code }}" lang="{{ l.code }}" dir="{{ l.dir }}" href="{{ l.code }}/">{{ l.continue_in }}{{ icon('chevron', 'icon-xs icon-chevron') }}</a>{% endfor %}
@@ -32,7 +37,6 @@
     </ul>
   </nav>
 
-  <p class="home-foot muted">Vrijwilligersinitiatief, geen officiële website van IOK · Volunteer initiative, not an official IOK website.<br>
-  Deze site vraagt nooit om geld of gegevens · This site never asks for money or personal data.</p>
+  <p class="home-foot muted">Vrijwilligersinitiatief, geen officiële website van IOK · Volunteer initiative, not an official IOK website.</p>
 </main>
 {% endblock %}

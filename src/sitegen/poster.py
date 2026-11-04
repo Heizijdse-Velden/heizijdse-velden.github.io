@@ -1,15 +1,11 @@
-"""Render the poster page to an A4 PDF with headless Chromium (optional 'poster' dependency group)."""
+"""Render the poster page to an A4 PDF with headless Chromium (Playwright)."""
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
-INSTALL_HINT = (
-    "The poster needs Playwright. Install it once with:\n"
-    "  uv run --group poster playwright install chromium\n"
-    "and then run:\n"
-    "  uv run --group poster sitegen poster"
-)
+INSTALL_HINT = "The poster needs Chromium. Install it once with:\n  uv run playwright install chromium"
 
 
 def render_pdf(html_path: Path, pdf_path: Path) -> None:
@@ -21,7 +17,7 @@ def render_pdf(html_path: Path, pdf_path: Path) -> None:
 
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch()
+            browser = p.chromium.launch(executable_path=os.environ.get("CHROMIUM_PATH") or None)
             page = browser.new_page()
             page.goto(html_path.resolve().as_uri())
             page.emulate_media(media="print")
