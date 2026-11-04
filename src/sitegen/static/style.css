@@ -121,7 +121,7 @@ bdi { unicode-bidi: isolate; }
 .note { padding: 10px 14px; background: var(--brand-soft); border-radius: 10px; font-size: .95rem; }
 
 /* ---------- Quick navigation: three equal buttons ---------- */
-.quicknav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 1rem 0 .25rem; }
+.quicknav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 1rem 0 .25rem; }
 .quicknav a {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 64px; padding: 8px 6px;
   background: var(--surface); border: 1.5px solid var(--line); border-radius: var(--radius);
@@ -129,6 +129,8 @@ bdi { unicode-bidi: isolate; }
 }
 .quicknav a:hover { border-color: var(--brand); }
 .quicknav .icon { width: 26px; height: 26px; color: var(--brand); }
+.quicknav span { max-width: 100%; overflow-wrap: anywhere; hyphens: auto; } /* never wider than the button */
+@media (max-width: 400px) { .quicknav a { padding-inline: 4px; font-size: .8rem; } }
 
 /* ---------- Steps ---------- */
 .steps { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 0; padding: 0; list-style: none; }
@@ -221,12 +223,14 @@ details.card > :last-child { margin-bottom: 16px; }
 .suggest-wrap { display: flex; justify-content: center; }
 .suggest { margin-bottom: 1rem; font-size: 1.1rem; }
 .suggest[hidden] { display: none; }
-.lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.lang-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
 .lang-btn {
   display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 64px; padding: 12px 16px;
   background: var(--surface); border: 1.5px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
   color: var(--ink); font-size: 1.2rem; font-weight: 700; text-decoration: none;
 }
+.lang-btn span { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 420px) { .lang-btn { padding-inline: 12px; font-size: 1rem; } }
 .lang-btn:hover { border-color: var(--brand); }
 .lang-btn .icon { color: var(--brand); }
 .home-foot { margin-top: 1.5rem; color: var(--muted); font-size: .85rem; text-align: center; }

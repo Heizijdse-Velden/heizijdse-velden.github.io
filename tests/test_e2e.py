@@ -142,8 +142,59 @@ def test_no_console_errors_or_horizontal_scroll(content: Content, base_url: str,
             problems.append(f"{path}: {errors}")
         overflow = page.evaluate("document.documentElement.scrollWidth - window.innerWidth")
         if path != "/affiche/" and overflow > 0:  # the poster is an A4 sheet by design
-            problems.append(f"{path}: {overflow}px horizontal scroll at 320px")
+            problems.append(
+                f"{path}: {overflow}px horizontal scroll at 320px, caused by {page.evaluate(WIDEST)}"
+            )
     assert problems == []
+
+
+#: Describe the element that sticks out furthest to the right, to make an overflow easy to fix.
+WIDEST = """() => {
+  let widest = null;
+  for (const el of document.body.querySelectorAll("*")) {
+    const right = el.getBoundingClientRect().right;
+    if (!widest || right > widest.right) widest = {right, el};
+  }
+  const el = widest.el;
+  const text = (el.textContent || "").trim().slice(0, 40);
+  return `<${el.tagName.toLowerCase()} class="${el.getAttribute("class") || ""}"> ${text}`;
+}"""
+
+#: For every button label: its longest word, and the room the button has for it.
+LABEL_ROOM = """(selector) => [...document.querySelectorAll(selector)].map((button) => {
+  const label = button.querySelector("span");
+  const style = getComputedStyle(button);
+  let room = button.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+  if (style.flexDirection === "row") {
+    for (const other of button.children) {
+      if (other !== label) room -= other.getBoundingClientRect().width + parseFloat(style.columnGap || "0");
+    }
+  }
+  const context = document.createElement("canvas").getContext("2d");
+  context.font = getComputedStyle(label).font;
+  const longest = Math.max(...label.textContent.split(/\\s+/).map((word) => context.measureText(word).width));
+  return {text: label.textContent, longest: Math.ceil(longest), room: Math.floor(room)};
+})"""
+
+
+@pytest.mark.parametrize(
+    ("selector", "path", "width"),
+    [(".quicknav a", "/{code}/", 320), (".lang-btn", "/", 361), (".lang-btn", "/", 375)],
+)
+def test_button_labels_fit_without_breaking_words(
+    content: Content, base_url: str, new_page: NewPage, selector: str, path: str, width: int
+) -> None:
+    """Short labels must fit whole; CSS only hyphenates as a last resort."""
+    too_long = []
+    for code in content.site["languages"] if "{code}" in path else ["nl"]:
+        page = new_page(viewport={"width": width, "height": 800})
+        page.goto(base_url + path.format(code=code))
+        too_long += [
+            f"{code}: {label['text']!r} needs {label['longest']}px, has {label['room']}px"
+            for label in page.evaluate(LABEL_ROOM, selector)
+            if label["longest"] > label["room"]
+        ]
+    assert too_long == []
 
 
 def test_poster_prints_as_a_single_a4_page(site: Path, browser: Browser, tmp_path: Path) -> None:
