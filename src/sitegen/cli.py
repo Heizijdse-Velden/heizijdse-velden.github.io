@@ -75,7 +75,7 @@ def main(argv: list[str] | None = None) -> None:
     serve = command("serve", cmd_serve, "build and serve the site locally")
     serve.add_argument("--port", type=int, default=8000)
     poster = command("poster", cmd_poster, "render the A4 poster to PDF (needs Chromium, see README)")
-    poster.add_argument("--pdf", type=Path, default=PROJECT_ROOT / "affiche.pdf")
+    poster.add_argument("--pdf", type=Path, default=PROJECT_ROOT / "outputs" / "affiche.pdf")
 
     args = parser.parse_args(argv)
     args.func(args)

@@ -37,6 +37,10 @@ def base_url(site: Path) -> Iterator[str]:
     server.server_close()
 
 
+CHROMIUM_HINT = "Chromium is not installed. Run once: uv run playwright install chromium"
+_session = {"chromium_missing": False}
+
+
 @pytest.fixture(scope="session")
 def browser() -> Iterator[object]:
     """Headless Chromium. Skipped locally if not installed; required in CI (REQUIRE_E2E=1)."""
@@ -47,6 +51,14 @@ def browser() -> Iterator[object]:
         except sync_api.Error as exc:
             if os.environ.get("REQUIRE_E2E") or "Executable doesn't exist" not in str(exc):
                 raise
-            pytest.skip("Chromium not installed: run `uv run playwright install chromium`")
+            _session["chromium_missing"] = True
+            pytest.skip(CHROMIUM_HINT)
         yield chromium
         chromium.close()
+
+
+def pytest_terminal_summary(terminalreporter: pytest.TerminalReporter) -> None:
+    """Skipped browser tests should be impossible to miss."""
+    if _session["chromium_missing"]:
+        terminalreporter.write_sep("=", "browser tests were skipped", yellow=True, bold=True)
+        terminalreporter.write_line(CHROMIUM_HINT, yellow=True, bold=True)
