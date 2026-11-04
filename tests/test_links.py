@@ -90,7 +90,7 @@ def check_link(url: str, attempts: int = 3) -> Result:
 
 
 def _unique_links() -> dict[str, str]:
-    """url -> first name it appears under, so every URL is checked once."""
+    """Url -> first name it appears under, so every URL is checked once."""
     unique: dict[str, str] = {}
     for name, url in all_links(load_content(CONTENT_DIR).site):
         unique.setdefault(url, name)

@@ -7,9 +7,9 @@
     "other_language": "Autre langue",
     "continue_in": "Continuer en français",
     "nav_open": "Ouvrir",
-    "nav_sort": "Quoi où ?",
-    "nav_help": "Problème ?",
-    "label_how": "Comment ?",
+    "nav_sort": "Quoi où ?",
+    "nav_help": "Problème ?",
+    "label_how": "Comment ?",
     "label_yes": "Oui",
     "label_no": "Non",
     "examples": "Exemples",
@@ -26,21 +26,21 @@
     "link_manual": "Mode d’emploi d’IOK (PDF)",
     "link_iok_page": "Page d’IOK sur les conteneurs enterrés"
   },
-  "page_title": "Conteneurs à déchets enterrés : mode d’emploi",
+  "page_title": "Conteneurs à déchets enterrés : mode d’emploi",
   "intro": "Notre quartier a des conteneurs à déchets enterrés. Ils s’ouvrent uniquement avec la carte d’accès (toegangspas) de votre logement. Voici comment les utiliser.",
   "trust": "Gratuit. Ce site ne demande jamais d’argent, de paiement ni de données personnelles. Pas de cookies, pas de suivi.",
   "translation_note": "Ceci est une traduction bénévole de l’explication officielle en néerlandais d’IOK, la société de gestion des déchets. En cas de doute, le texte néerlandais fait foi.",
   "steps_title": "Comment ouvrir le conteneur",
   "steps": [
-    "Allez au bon conteneur. L’écran affiche : “Welkom, bied je pas aan.” (Bienvenue, présentez votre carte.)",
+    "Allez au bon conteneur. L’écran affiche : “Welkom, bied je pas aan.” (Bienvenue, présentez votre carte.)",
     "Tenez votre carte d’accès sous l’écran pendant quelques secondes.",
-    "L’écran affiche : “Pas geaccepteerd.” (Carte acceptée.) Retirez votre carte.",
+    "L’écran affiche : “Pas geaccepteerd.” (Carte acceptée.) Retirez votre carte.",
     "Le couvercle s’ouvre tout seul.",
     "Jetez vos déchets dans le conteneur.",
     "Refermez le couvercle."
   ],
   "video_link": "Voir la vidéo d’IOK (YouTube)",
-  "containers_title": "Quels déchets, dans quel conteneur ?",
+  "containers_title": "Quels déchets, dans quel conteneur ?",
   "containers_intro": "Les règles officielles se trouvent dans le guide de tri d’IOK et sur trionsmieux.be. Voici quelques exemples.",
   "guide_link": "Guide de tri d’IOK (néerlandais, français, anglais)",
   "fostplus_link": "trionsmieux.be (Fost Plus)",
@@ -67,48 +67,48 @@
     }
   },
   "never_title": "Ne laissez jamais de déchets à côté du conteneur",
-  "never_text": "Même pas si le conteneur est plein ou en panne. C’est un dépôt clandestin (sluikstorten) : vous risquez une lourde amende. Reprenez vos déchets chez vous et signalez le problème à IOK.",
+  "never_text": "Même pas si le conteneur est plein ou en panne. C’est un dépôt clandestin (sluikstorten) : vous risquez une lourde amende. Reprenez vos déchets chez vous et signalez le problème à IOK.",
   "faq_title": "Que faire si…",
   "faq": {
     "blocked": {
-      "q": "…le conteneur ne s’ouvre pas, est plein ou en panne ?",
+      "q": "…le conteneur ne s’ouvre pas, est plein ou en panne ?",
       "a": "Reprenez vos déchets chez vous. Signalez le problème à IOK. IOK le résout le plus vite possible.",
       "hours": "Du lundi au vendredi, de 8 h à 16 h"
     },
     "lost": {
-      "q": "…j’ai perdu ma carte d’accès ou elle est cassée ?",
+      "q": "…j’ai perdu ma carte d’accès ou elle est cassée ?",
       "a": "Demandez une nouvelle carte à IOK. Une nouvelle carte coûte 5 euros.",
       "hours": "Du lundi au jeudi de 8 h 30 à 16 h 30, le vendredi de 8 h 30 à 16 h"
     },
     "moved_in": {
-      "q": "…je viens d’emménager et je n’ai pas de carte ?",
-      "a": "La carte appartient au logement, pas à la personne. Demandez la carte à votre propriétaire ou à l’ancien habitant. Faites enregistrer votre adresse à la ville de Turnhout. Pas de carte ? Contactez IOK."
+      "q": "…je viens d’emménager et je n’ai pas de carte ?",
+      "a": "La carte appartient au logement, pas à la personne. Demandez la carte à votre propriétaire ou à l’ancien habitant. Faites enregistrer votre adresse à la ville de Turnhout. Pas de carte ? Contactez IOK."
     },
     "moving_out": {
-      "q": "…je déménage ?",
+      "q": "…je déménage ?",
       "a": "Laissez la carte d’accès et le mode d’emploi dans le logement. Signalez votre déménagement à la ville."
     },
     "bag": {
-      "q": "…mon sac est trop grand ?",
+      "q": "…mon sac est trop grand ?",
       "a": "Utilisez un sac plus petit (30 litres maximum), pour que le couvercle se referme facilement. Ne posez jamais le sac à côté du conteneur."
     },
     "elsewhere": {
-      "q": "…j’ai du verre, des objets encombrants, des appareils électriques ou des déchets chimiques ?",
+      "q": "…j’ai du verre, des objets encombrants, des appareils électriques ou des déchets chimiques ?",
       "a": "Ils ne sont pas autorisés dans ces conteneurs. Apportez-les au parc à conteneurs (recyclagepark). Prenez votre carte d’identité."
     },
     "cost": {
-      "q": "…je veux savoir combien je paie ?",
+      "q": "…je veux savoir combien je paie ?",
       "a": "Les déchets résiduels coûtent un montant fixe à chaque utilisation du conteneur. Il est prélevé sur le compte déchets (DIFTAR) de votre logement. Les PMC et le papier sont gratuits."
     }
   },
-  "translate_title": "Votre langue n’est pas dans la liste ?",
-  "translate_intro": "Votre téléphone peut traduire cette page :",
-  "translate_android": "Android (Chrome) : touchez ⋮ en haut à droite et choisissez « Traduire ».",
-  "translate_iphone": "iPhone (Safari) : touchez l’icône à gauche de la barre d’adresse et choisissez « Traduire ».",
-  "translate_paper": "Papier (comme le mode d’emploi d’IOK) : ouvrez l’application Google Traduction, choisissez « Caméra » et visez le texte.",
+  "translate_title": "Votre langue n’est pas dans la liste ?",
+  "translate_intro": "Votre téléphone peut traduire cette page :",
+  "translate_android": "Android (Chrome) : touchez ⋮ en haut à droite et choisissez « Traduire ».",
+  "translate_iphone": "iPhone (Safari) : touchez l’icône à gauche de la barre d’adresse et choisissez « Traduire ».",
+  "translate_paper": "Papier (comme le mode d’emploi d’IOK) : ouvrez l’application Google Traduction, choisissez « Caméra » et visez le texte.",
   "about_title": "À propos de ce site",
   "about_text": "Ceci est une initiative de bénévoles du quartier. Ce n’est pas un site officiel d’IOK ni de la ville de Turnhout.",
-  "about_scam": "Une page vous demande quand même de l’argent ou des données ? Ce n’est pas ce site. Ne lui faites pas confiance.",
+  "about_scam": "Une page vous demande quand même de l’argent ou des données ? Ce n’est pas ce site. Ne lui faites pas confiance.",
   "poster_scan": "Scannez pour votre langue",
   "poster_safe": "Gratuit · jamais de paiement ni de données personnelles"
 }

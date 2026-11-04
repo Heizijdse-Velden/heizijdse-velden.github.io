@@ -1,0 +1,48 @@
+{#- Language chooser. Also rendered as 404.html, so a wrong URL lands one tap away from every language. -#}
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% from "_macros.html" import trust, alternates %}
+{% block title %}{{ nl.page_title }} · {{ nl.ui.choose_language }}{% endblock %}
+{% block description %}{{ nl.intro }}{% endblock %}
+{% block head %}
+{{ alternates(site, langs) }}
+<script src="{{ root }}static/lang.js?v={{ asset_version }}" defer></script>
+{% endblock %}
+{% block body_class %} class="home"{% endblock %}
+{% block body %}
+<main class="wrap">
+  <div class="home-hero">
+    {% if not_found %}
+    <p class="not-found">Pagina niet gevonden · <span lang="en">Page not found</span></p>
+    {% else %}
+    <div class="hero-icons" aria-hidden="true">{{ icon('pass') }}{{ icon('step4') }}{{ icon('rest') }}{{ icon('pmd') }}{{ icon('paper') }}</div>
+    {% endif %}
+    {{ icon('globe', 'globe') }}
+    <h1>{{ nl.ui.choose_language }}</h1>
+    <ul class="prompts" aria-hidden="true">
+      {% for l in langs if l.code != 'nl' %}
+      <li lang="{{ l.code }}" dir="{{ l.dir }}">{{ l.choose_language }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  {% call trust('trust-home') %}{{ nl.trust }}<br><span lang="en">{{ en.trust }}</span>{% endcall %}
+
+  {#- Hidden suggestions: lang.js reveals the one matching the phone's language. Without JavaScript the list below still works. #}
+  <div class="suggest-wrap">
+    {% for l in langs %}
+    <a class="suggest btn btn-primary" hidden data-lang="{{ l.code }}" lang="{{ l.code }}" dir="{{ l.dir }}" href="{{ root }}{{ l.code }}/">{{ l.continue_in }}{{ icon('chevron', 'icon-xs') }}</a>
+    {% endfor %}
+  </div>
+
+  <nav aria-label="{{ nl.ui.choose_language }}">
+    <ul class="lang-grid">
+      {% for l in langs %}
+      <li><a class="lang-btn" href="{{ root }}{{ l.code }}/" lang="{{ l.code }}" dir="{{ l.dir }}" hreflang="{{ l.code }}"><span>{{ l.name }}</span>{{ icon('chevron', 'icon-xs') }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <p class="home-foot">{{ nl.about_text }}<br><span lang="en">{{ en.about_text }}</span></p>
+</main>
+{% endblock %}

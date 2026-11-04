@@ -1,7 +1,13 @@
+# Generated
 _site/
-affiche.pdf
+outputs/
+
+# Tooling
 .venv/
 __pycache__/
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
+.coverage*
+
 .DS_Store

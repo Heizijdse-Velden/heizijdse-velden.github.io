@@ -1,7 +1,8 @@
-{#- Eigen pictogrammen (geen IOK-beeldmateriaal: dat is auteursrechtelijk beschermd).
-    Gebruik: {{ icon('pass') }}. Alle lijnen gebruiken currentColor. -#}
+{#- Our own pictograms (no IOK images: those are copyrighted).
+    Usage: {{ icon('pass') }} or {{ icon('pass', 'icon-sm') }}. Strokes use currentColor;
+    every icon also gets the class icon-<name>, e.g. for right-to-left mirroring in CSS. -#}
 {%- macro icon(name, cls='') -%}
-<svg class="icon {{ cls }}" viewBox="0 0 64 64" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<svg class="icon icon-{{ name }}{{ ' ' ~ cls if cls }}" viewBox="0 0 64 64" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
 {%- if name == 'step1' -%}
   <path d="M6 58H58"/><rect x="15" y="17" width="34" height="7" rx="2"/><rect x="18" y="24" width="28" height="34" rx="3"/>
   <rect x="24" y="31" width="16" height="11" rx="1.5"/><path d="M27 35h10M27 38.5h6" stroke-width="2"/>

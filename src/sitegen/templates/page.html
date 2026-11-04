@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% from "_icons.html" import icon %}
+{% from "_macros.html" import trust, alternates %}
 {% block title %}{{ t.page_title }}{% endblock %}
 {% block description %}{{ t.intro }}{% endblock %}
 {% block head %}
-{% for l in langs %}<link rel="alternate" hreflang="{{ l.code }}" href="{{ site.site_url }}{{ l.code }}/">
-{% endfor %}{% endblock %}
+{{ alternates(site, langs) }}
+{% endblock %}
 
 {%- macro contact_block(c, hours) -%}
 <div class="contact">
@@ -19,7 +20,7 @@
 {%- endmacro -%}
 
 {%- macro ext_link(url, label) -%}
-<a class="link-row" href="{{ url }}" rel="noopener noreferrer"><span>{{ label }}{{ dutch_suffix() }}</span>{{ icon('external', 'icon-sm') }}</a>
+<a class="link-row" href="{{ url }}"><span>{{ label }}{{ dutch_suffix() }}</span>{{ icon('external', 'icon-sm') }}</a>
 {%- endmacro -%}
 
 {% block body %}
@@ -34,13 +35,10 @@
   <h1>{{ t.page_title|nl }}</h1>
   <p class="lead">{{ t.intro|nl }}</p>
 
-  <p class="trust" role="note">
-    <span class="trust-icons" aria-hidden="true">{{ icon('nomoney') }}{{ icon('nodata') }}{{ icon('notrack') }}</span>
-    <span>{{ t.trust }}</span>
-  </p>
+  {% call trust() %}{{ t.trust }}{% endcall %}
   {% if t.is_translation %}<p class="note">{{ t.translation_note|nl }}</p>{% endif %}
 
-  <nav class="quicknav" aria-label="{{ t.page_title }}">
+  <nav class="quicknav">
     <a href="#open">{{ icon('step4', 'icon-sm') }}<span>{{ t.ui.nav_open }}</span></a>
     <a href="#sort">{{ icon('pmd', 'icon-sm') }}<span>{{ t.ui.nav_sort }}</span></a>
     <a href="#help">{{ icon('warn', 'icon-sm') }}<span>{{ t.ui.nav_help }}</span></a>
@@ -57,7 +55,7 @@
       </li>
       {% endfor %}
     </ol>
-    <a class="video-link" href="{{ site.links.iok_video }}" rel="noopener noreferrer">{{ icon('play', 'icon-sm') }}<span>{{ t.video_link }}{{ dutch_suffix() }}</span></a>
+    <a class="video-link" href="{{ site.links.iok_video }}">{{ icon('play', 'icon-sm') }}<span>{{ t.video_link }}{{ dutch_suffix() }}</span></a>
   </section>
 
   <section id="sort" aria-labelledby="h-containers">
@@ -65,8 +63,8 @@
     <div class="reference">
       <p>{{ t.containers_intro|nl }}</p>
       <div class="reference-links">
-        <a class="btn btn-primary" href="{{ guide_url }}" rel="noopener noreferrer">{{ icon('book', 'icon-xs') }}<span>{{ t.guide_link }}</span></a>
-        <a class="btn" href="{{ fostplus_url }}" rel="noopener noreferrer">{{ icon('external', 'icon-xs') }}<span>{{ t.fostplus_link }}</span></a>
+        <a class="btn btn-primary" href="{{ guide_url }}">{{ icon('book', 'icon-xs') }}<span>{{ t.guide_link }}</span></a>
+        <a class="btn" href="{{ fostplus_url }}">{{ icon('external', 'icon-xs') }}<span>{{ t.fostplus_link }}</span></a>
       </div>
     </div>
     <p>{{ t.containers_note|nl }}</p>
@@ -82,7 +80,7 @@
           <span class="badge {{ 'badge-paid' if key == 'rest' else 'badge-free' }}">{{ t.ui.paid if key == 'rest' else t.ui.free }}</span>
         </header>
         <div class="fraction-body">
-          <p class="how"><strong>{{ t.ui.label_how }}</strong> {{ f.how|nl }}</p>
+          <p><strong>{{ t.ui.label_how }}</strong> {{ f.how|nl }}</p>
           <details class="examples">
             <summary>{{ t.ui.examples }}</summary>
             <p class="yes">{{ icon('check', 'icon-xs') }}<span><strong>{{ t.ui.label_yes }}:</strong> {{ f.yes|nl }}</span></p>
@@ -94,8 +92,8 @@
     </div>
   </section>
 
-  <section class="callout callout-danger" aria-labelledby="h-never">
-    {{ icon('nodump', 'icon-lg') }}
+  <section class="callout" aria-labelledby="h-never">
+    {{ icon('nodump') }}
     <div>
       <h2 id="h-never">{{ t.never_title|nl }}</h2>
       <p>{{ t.never_text|nl }}</p>
@@ -124,7 +122,7 @@
     </div>
   </section>
 
-  <details class="card translate">
+  <details class="card">
     <summary>{{ icon('translate', 'icon-md') }}<span>{{ t.translate_title }}</span></summary>
     <p>{{ t.translate_intro }}</p>
     <ul class="tips">
@@ -135,7 +133,7 @@
     <a class="btn" href="{{ root }}" hreflang="x-default">{{ icon('globe', 'icon-xs') }}<span>{{ t.ui.choose_language }}</span></a>
   </details>
 
-  <section class="card about" aria-labelledby="h-about">
+  <section class="card" aria-labelledby="h-about">
     {{ icon('shield', 'icon-md') }}
     <h2 id="h-about">{{ t.about_title }}</h2>
     <p>{{ t.about_text }}</p>

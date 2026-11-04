@@ -1,19 +1,15 @@
-// Toont één knop "Verder in <taal>" als de taal van de telefoon op de site staat.
-// Geen tracking, geen cookies, niets wordt opgeslagen of verstuurd.
-(function () {
+// Reveals one "Continue in <language>" button when the phone's language is on the site.
+// Nothing is stored or sent. Plain ES2015, so it also runs on older phones.
+(() => {
   "use strict";
-  var links = document.querySelectorAll("a.suggest[data-lang]");
-  if (!links.length) return;
-  var wanted = (navigator.languages && navigator.languages.length)
-    ? navigator.languages
-    : [navigator.language || ""];
-  for (var i = 0; i < wanted.length; i++) {
-    var code = String(wanted[i]).toLowerCase().split("-")[0];
-    for (var j = 0; j < links.length; j++) {
-      if (links[j].getAttribute("data-lang") === code) {
-        links[j].hidden = false;
-        return;
-      }
+  const links = Array.from(document.querySelectorAll("a.suggest[data-lang]"));
+  const wanted = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+  for (const tag of wanted) {
+    const code = String(tag).toLowerCase().split("-")[0];
+    const match = links.find((link) => link.dataset.lang === code);
+    if (match) {
+      match.hidden = false;
+      return;
     }
   }
 })();

@@ -1,4 +1,4 @@
-"""Local static server that behaves like GitHub Pages for unknown URLs (serves /404.html)."""
+"""Local static server that behaves like GitHub Pages for unknown URLs (it serves /404.html)."""
 
 from __future__ import annotations
 
@@ -9,10 +9,13 @@ from pathlib import Path
 
 
 class PagesRequestHandler(SimpleHTTPRequestHandler):
-    def log_message(self, format: str, *args: object) -> None:  # noqa: A002 - signature from stdlib
-        pass  # keep test and terminal output clean
+    """Static file handler with GitHub Pages' 404 behaviour and without request logging."""
+
+    def log_message(self, format: str, *args: object) -> None:  # noqa: A002 - stdlib signature
+        """Stay quiet: request logs only clutter test and terminal output."""
 
     def send_error(self, code: int, message: str | None = None, explain: str | None = None) -> None:
+        """Serve the site's own 404.html for missing files, like GitHub Pages does."""
         not_found_page = Path(self.directory) / "404.html"
         if code != HTTPStatus.NOT_FOUND or not not_found_page.is_file():
             super().send_error(code, message, explain)
@@ -27,6 +30,6 @@ class PagesRequestHandler(SimpleHTTPRequestHandler):
 
 
 def make_server(directory: Path, port: int = 0, host: str = "127.0.0.1") -> ThreadingHTTPServer:
-    """Port 0 picks a free port; read it back from server.server_address[1]."""
+    """Create (not start) a server for ``directory``. Port 0 picks a free port: see ``server_address``."""
     handler = functools.partial(PagesRequestHandler, directory=str(directory))
     return ThreadingHTTPServer((host, port), handler)

@@ -8,11 +8,11 @@
 <meta name="color-scheme" content="light dark">
 <title>{% block title %}{% endblock %}</title>
 <meta name="description" content="{% block description %}{% endblock %}">
-<link rel="icon" href="{{ root }}favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="{{ root }}static/style.css?v={{ build_id }}">
+<link rel="icon" href="{{ root }}static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="{{ root }}static/style.css?v={{ asset_version }}">
 {% block head %}{% endblock %}
 </head>
-<body class="{% block bodyclass %}{% endblock %}">
+<body{% block body_class %}{% endblock %}>
 {% block body %}{% endblock %}
 </body>
 </html>

@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
+import hashlib
 import io
 import re
 import shutil
 from collections.abc import Callable
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -20,12 +20,16 @@ from sitegen.content import Content
 TEMPLATES_DIR = PACKAGE_DIR / "templates"
 STATIC_DIR = PACKAGE_DIR / "static"
 
-OPEN_QUOTES = "«„“‘‚"
-CLOSE_QUOTES = "»“”’‘"
+# Opening and closing quotation marks used by the content languages (guillemets, low-9, curly).
+OPEN_QUOTES = "\u00ab\u201e\u201c\u2018\u201a"
+CLOSE_QUOTES = "\u00bb\u201c\u201d\u2019\u2018"
 
 
 def make_qr(url: str) -> tuple[str, bytes]:
-    """QR code as inline SVG and PNG. Error correction 'Q' (25%) survives a dirty or damaged poster."""
+    """Return the QR code as inline SVG and as PNG.
+
+    Error correction level Q (25%) keeps it scannable on a dirty or damaged poster.
+    """
     qr = segno.make_qr(url, error="q", boost_error=False)
     svg, png = io.BytesIO(), io.BytesIO()
     qr.save(svg, kind="svg", xmldecl=False, svgns=True, omitsize=True, border=4, nl=False)
@@ -34,24 +38,34 @@ def make_qr(url: str) -> tuple[str, bytes]:
 
 
 def dutch_terms_filter(terms: list[str]) -> Callable[[str], Markup]:
-    """Wrap literal Dutch terms (e.g. the text on the container screen) in <bdi lang="nl" dir="ltr">.
+    """Build the ``|nl`` template filter that marks literal Dutch terms in translated text.
 
-    This keeps them readable in right-to-left languages, keeps a quoted term on one line, and makes
-    screen readers pronounce it in Dutch. Text is escaped first, so translations can't inject HTML.
+    Each term gets ``<bdi lang="nl" dir="ltr">``: it reads correctly in right-to-left languages
+    and screen readers pronounce it in Dutch. A quoted term (the text on the container screen)
+    also stays on one line, quotes included. Text is escaped first, so content can't inject HTML.
     """
     if not terms:
-        return lambda text: escape(text)
+        return escape
     alternatives = "|".join(re.escape(str(escape(t))) for t in sorted(terms, key=len, reverse=True))
     pattern = re.compile(f"([{OPEN_QUOTES}]?)({alternatives})([{CLOSE_QUOTES}]?)")
 
     def wrap(match: re.Match[str]) -> str:
         before, term, after = match.groups()
-        return f'<span class="nlq">{before}<bdi lang="nl" dir="ltr">{term}</bdi>{after}</span>'
+        marked = f'<bdi lang="nl" dir="ltr">{term}</bdi>'
+        return f'<span class="nlq">{before}{marked}{after}</span>' if before or after else marked
 
-    return lambda text: Markup(pattern.sub(wrap, str(escape(text))))
+    return lambda text: Markup(pattern.sub(wrap, str(escape(text))))  # noqa: S704 - escaped first
 
 
-def make_env(content: Content) -> Environment:
+def _asset_version() -> str:
+    """Short hash of the static files, so browsers fetch new CSS/JS only when it changed."""
+    digest = hashlib.sha256()
+    for path in sorted(p for p in STATIC_DIR.rglob("*") if p.is_file()):
+        digest.update(path.read_bytes())
+    return digest.hexdigest()[:10]
+
+
+def _make_env(content: Content) -> Environment:
     env = Environment(
         loader=FileSystemLoader(TEMPLATES_DIR),
         autoescape=select_autoescape(["html"]),
@@ -64,7 +78,7 @@ def make_env(content: Content) -> Environment:
 
 
 def _language_summary(code: str, t: dict[str, Any]) -> dict[str, str]:
-    """What the language chooser and the poster need to know about each language."""
+    """Return what the language chooser and the poster need to know about a language."""
     return {
         "code": code,
         "name": t["lang_name"],
@@ -77,38 +91,31 @@ def _language_summary(code: str, t: dict[str, Any]) -> dict[str, str]:
 
 
 def build(content: Content, out_dir: Path) -> None:
+    """Render every page, the poster and the QR code into ``out_dir`` (replacing what is there)."""
     site = content.site
-    env = make_env(content)
-    langs = [_language_summary(code, content.langs[code]) for code in site["languages"]]
+    env = _make_env(content)
     common = {
         "site": site,
         "site_host": content.site_host,
-        "langs": langs,
-        "build_id": datetime.now(UTC).strftime("%Y%m%d%H%M"),
+        "langs": [_language_summary(code, content.langs[code]) for code in site["languages"]],
+        "nl": content.langs["nl"],
+        "en": content.langs["en"],
+        "asset_version": _asset_version(),
     }
 
     if out_dir.exists():
         shutil.rmtree(out_dir)
     shutil.copytree(STATIC_DIR, out_dir / "static")
-    shutil.copy(STATIC_DIR / "favicon.svg", out_dir / "favicon.svg")
 
     def render(template: str, target: str, **ctx: Any) -> None:
         path = out_dir / target
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(env.get_template(template).render(**common, **ctx), encoding="utf-8")
 
-    # Language chooser.
-    render(
-        "index.html",
-        "index.html",
-        lang="nl",
-        dir="ltr",
-        root="",
-        trust_nl=content.langs["nl"]["trust"],
-        trust_en=content.langs["en"]["trust"] if "en" in content.langs else "",
-    )
+    render("chooser.html", "index.html", lang="nl", dir="ltr", root="", not_found=False)
+    # GitHub Pages serves /404.html for unknown URLs at any depth, so its links must be absolute.
+    render("chooser.html", "404.html", lang="nl", dir="ltr", root=content.base_path, not_found=True)
 
-    # One page per language.
     for code in site["languages"]:
         t = content.langs[code]
         render(
@@ -122,7 +129,6 @@ def build(content: Content, out_dir: Path) -> None:
             fostplus_url=site["fostplus_sites"][code],
         )
 
-    # Poster + QR code.
     qr_svg, qr_png = make_qr(site["site_url"])
     (out_dir / "qr.svg").write_text(qr_svg, encoding="utf-8")
     (out_dir / "qr.png").write_bytes(qr_png)
@@ -133,9 +139,5 @@ def build(content: Content, out_dir: Path) -> None:
         dir="ltr",
         root="../",
         p=content.poster,
-        qr_svg=Markup(qr_svg),
-        nl_scan=content.langs["nl"]["poster_scan"],
+        qr_svg=Markup(qr_svg),  # noqa: S704 - generated by segno,
     )
-
-    # GitHub Pages serves /404.html for unknown URLs at any depth, so asset paths must be absolute.
-    render("404.html", "404.html", lang="nl", dir="ltr", root=content.base_path)

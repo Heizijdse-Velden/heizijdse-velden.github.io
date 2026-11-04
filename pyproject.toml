@@ -14,8 +14,10 @@ sitegen = "sitegen.cli:main"
 
 [dependency-groups]
 dev = [
+    "mypy>=1.18",
     "playwright>=1.55",
     "pytest>=8.4",
+    "pytest-cov>=7.0",
     "ruff>=0.14",
     "zizmor>=1.16",
 ]
@@ -32,7 +34,30 @@ line-length = 110
 target-version = "py312"
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B", "SIM"]
+select = [
+    "E", "W", "F",  # pycodestyle + pyflakes (PEP 8)
+    "I",            # import order
+    "N",            # naming (PEP 8)
+    "D",            # docstrings (PEP 257)
+    "UP",           # modern syntax
+    "B", "A", "C4", "SIM", "RET", "PTH", "PT", "RUF",
+    "S",            # security (bandit)
+]
+ignore = ["D105", "D107"]  # docstrings for magic methods and __init__
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D", "S101", "S310"]  # test names document themselves; plain asserts; local URLs
+
+[tool.mypy]
+strict = true
+files = ["src", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["segno"]
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -41,3 +66,14 @@ markers = [
     "e2e: drives a real browser; needs `uv run playwright install chromium` (skipped if missing)",
     "external: needs internet; checks external links (run with `uv run pytest -m external`)",
 ]
+
+[tool.coverage.run]
+source = ["sitegen"]
+branch = true
+patch = ["subprocess"]  # also measure `sitegen` runs started by the tests
+concurrency = ["thread", "greenlet"]  # Playwright's sync API runs on greenlets
+
+[tool.coverage.report]
+fail_under = 95
+show_missing = true
+skip_covered = true
