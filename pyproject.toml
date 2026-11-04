@@ -1,0 +1,39 @@
+[project]
+name = "heizijdse-velden"
+version = "1.0.0"
+description = "Multilingual guide to the underground waste containers in Turnhout: static site + A4 poster."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "jinja2>=3.1.6",
+    "segno>=1.6.6",
+]
+
+[project.scripts]
+sitegen = "sitegen.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4",
+    "ruff>=0.14",
+]
+poster = [
+    "playwright>=1.55",
+]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sitegen"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
