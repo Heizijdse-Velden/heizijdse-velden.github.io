@@ -89,7 +89,7 @@ def _compare_structure(ref: Any, other: Any, path: str, errors: list[str]) -> No
             f"{path}.{key}: unknown key (not in {REFERENCE_LANG}.json)"
             for key in sorted(other.keys() - ref.keys())
         ]
-        for key in ref.keys() & other.keys():
+        for key in (key for key in ref if key in other):  # file order, so messages are stable
             _compare_structure(ref[key], other[key], f"{path}.{key}", errors)
     elif isinstance(ref, list):
         if not isinstance(other, list) or len(other) != len(ref):
@@ -121,8 +121,9 @@ def _validate_language(content: Content, code: str, errors: list[str]) -> None:
     _find_empty(lang, code, errors, allowed={f"{REFERENCE_LANG}.translation_note"})
     if lang.get("dir") not in ("ltr", "rtl"):
         errors.append(f"{code}.dir must be 'ltr' or 'rtl'")
-    if lang.get("is_translation") is not (code != REFERENCE_LANG):
-        errors.append(f"{code}.is_translation must be {str(code != REFERENCE_LANG).lower()}")
+    is_translation = code != REFERENCE_LANG
+    if lang.get("is_translation") is not is_translation:
+        errors.append(f"{code}.is_translation must be {str(is_translation).lower()}")
     errors += [
         f"site.json: {group}.{code} is missing"
         for group in PER_LANGUAGE_LINKS

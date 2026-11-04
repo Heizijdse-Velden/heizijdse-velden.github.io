@@ -39,9 +39,9 @@
   {% if t.is_translation %}<p class="note">{{ t.translation_note|nl }}</p>{% endif %}
 
   <nav class="quicknav">
-    <a href="#open">{{ icon('step4', 'icon-sm') }}<span>{{ t.ui.nav_open }}</span></a>
-    <a href="#sort">{{ icon('pmd', 'icon-sm') }}<span>{{ t.ui.nav_sort }}</span></a>
-    <a href="#help">{{ icon('warn', 'icon-sm') }}<span>{{ t.ui.nav_help }}</span></a>
+    <a href="#open">{{ icon('step4') }}<span>{{ t.ui.nav_open }}</span></a>
+    <a href="#sort">{{ icon('pmd') }}<span>{{ t.ui.nav_sort }}</span></a>
+    <a href="#help">{{ icon('warn') }}<span>{{ t.ui.nav_help }}</span></a>
   </nav>
 
   <section id="open" aria-labelledby="h-steps">
@@ -147,7 +147,8 @@
 <footer class="footer">
   <div class="wrap">
     <p><bdi dir="ltr">{{ site_host }}</bdi> · {{ t.ui.last_reviewed }}: <time class="nowrap" datetime="{{ site.last_reviewed }}">{{ site.last_reviewed }}</time></p>
-    {% if site.maintainer_email %}<p><a href="mailto:{{ site.maintainer_email }}"><bdi dir="ltr">{{ site.maintainer_email }}</bdi></a></p>{% endif %}
+    {% set email = site.get('maintainer_email') %}
+    {% if email %}<p><a href="mailto:{{ email }}"><bdi dir="ltr">{{ email }}</bdi></a></p>{% endif %}
   </div>
 </footer>
 {% endblock %}

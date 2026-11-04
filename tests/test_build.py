@@ -10,7 +10,7 @@ from urllib.parse import urldefrag, urlparse
 
 import pytest
 
-from sitegen.build import build, dutch_terms_filter, make_qr
+from sitegen.build import POSTER_PAGE, build, dutch_terms_filter, make_qr
 from sitegen.content import Content
 
 EXTERNAL_RESOURCE = re.compile(
@@ -89,7 +89,7 @@ def test_qr_code_encodes_the_site_url_printed_on_the_poster(content: Content, si
     svg, png = make_qr(content.site["site_url"])
     assert svg.startswith("<svg")
     assert png.startswith(b"\x89PNG")
-    assert content.site_host in (site / "affiche" / "index.html").read_text()
+    assert content.site_host in (site / POSTER_PAGE).read_text()
 
 
 def test_dutch_terms_are_isolated_and_quoted_ones_kept_together() -> None:
@@ -99,6 +99,14 @@ def test_dutch_terms_are_isolated_and_quoted_ones_kept_together() -> None:
     assert '<bdi lang="nl" dir="ltr">toegangspas</bdi>' in html
     assert "&lt;b&gt;" in html
     assert str(dutch_terms_filter([])("<b>")) == "&lt;b&gt;"
+
+
+def test_optional_settings_can_be_left_out(content: Content, tmp_path: Path) -> None:
+    minimal = copy.deepcopy(content)
+    email = minimal.site.pop("maintainer_email")
+    minimal.site.pop("dutch_terms")
+    build(minimal, tmp_path)
+    assert email not in (tmp_path / "nl" / "index.html").read_text()
 
 
 def test_translated_text_is_escaped(content: Content, tmp_path: Path) -> None:

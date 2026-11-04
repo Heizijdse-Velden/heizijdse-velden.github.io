@@ -12,6 +12,7 @@ from pathlib import Path
 import pytest
 from playwright.sync_api import Browser, BrowserContext, Page, ViewportSize
 
+from sitegen.build import POSTER_PAGE
 from sitegen.content import Content
 from sitegen.poster import print_pdf
 
@@ -147,7 +148,7 @@ def test_no_console_errors_or_horizontal_scroll(content: Content, base_url: str,
 
 def test_poster_prints_as_a_single_a4_page(site: Path, browser: Browser, tmp_path: Path) -> None:
     pdf = tmp_path / "out" / "affiche.pdf"
-    print_pdf(browser, site / "affiche" / "index.html", pdf)
+    print_pdf(browser, site / POSTER_PAGE, pdf)
     data = pdf.read_bytes()
     assert data.startswith(b"%PDF")
     assert len(re.findall(rb"/Type\s*/Page\b", data)) == 1

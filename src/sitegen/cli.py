@@ -9,7 +9,7 @@ from collections.abc import Callable, Sequence
 from pathlib import Path
 
 from sitegen import CONTENT_DIR, OUTPUT_DIR, PROJECT_ROOT
-from sitegen.build import build
+from sitegen.build import POSTER_PAGE, build
 from sitegen.content import Content, ContentError, load_content, validate
 from sitegen.server import make_server
 
@@ -56,7 +56,7 @@ def cmd_poster(args: argparse.Namespace) -> None:
     from sitegen.poster import render_pdf  # Playwright loads slowly; only the poster needs it.
 
     cmd_build(args)
-    render_pdf(args.out / "affiche" / "index.html", args.pdf)
+    render_pdf(args.out / POSTER_PAGE, args.pdf)
     print(f"Poster written to {args.pdf}")
 
 

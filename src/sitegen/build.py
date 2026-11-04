@@ -19,6 +19,7 @@ from sitegen.content import Content
 
 TEMPLATES_DIR = PACKAGE_DIR / "templates"
 STATIC_DIR = PACKAGE_DIR / "static"
+POSTER_PAGE = "affiche/index.html"
 
 # Opening and closing quotation marks used by the content languages (guillemets, low-9, curly).
 OPEN_QUOTES = "\u00ab\u201e\u201c\u2018\u201a"
@@ -134,7 +135,7 @@ def build(content: Content, out_dir: Path) -> None:
     (out_dir / "qr.png").write_bytes(qr_png)
     render(
         "poster.html",
-        "affiche/index.html",
+        POSTER_PAGE,
         lang="nl",
         dir="ltr",
         root="../",

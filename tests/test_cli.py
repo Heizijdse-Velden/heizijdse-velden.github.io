@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import shutil
 import subprocess
@@ -14,18 +15,19 @@ import pytest
 
 from sitegen import CONTENT_DIR
 from sitegen.cli import main
+from sitegen.content import Content
 from sitegen.server import make_server
 
 
-def test_check_reports_ok(capsys: pytest.CaptureFixture[str]) -> None:
+def test_check_reports_ok(content: Content, capsys: pytest.CaptureFixture[str]) -> None:
     main(["check"])
-    assert "OK: 10 languages are complete." in capsys.readouterr().out
+    assert f"OK: {len(content.site['languages'])} languages are complete." in capsys.readouterr().out
 
 
-def test_build_writes_the_site(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+def test_build_writes_the_site(content: Content, tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     main(["build", "--out", str(tmp_path / "site")])
     assert (tmp_path / "site" / "nl" / "index.html").is_file()
-    assert "Built 10 languages" in capsys.readouterr().out
+    assert f"Built {len(content.site['languages'])} languages" in capsys.readouterr().out
 
 
 def test_content_errors_stop_the_build_with_a_readable_message(tmp_path: Path) -> None:
@@ -49,7 +51,7 @@ def test_warnings_go_to_stderr_but_do_not_fail(tmp_path: Path, capsys: pytest.Ca
     content = tmp_path / "content"
     shutil.copytree(CONTENT_DIR, content)
     site_json = content / "site.json"
-    site_json.write_text(site_json.read_text().replace('"publisher": "Pieter Huycke"', '"publisher": ""'))
+    site_json.write_text(json.dumps({**json.loads(site_json.read_text()), "publisher": ""}))
     main(["check", "--content", str(content)])
     assert "warning: site.json: 'publisher' (V.U.) is empty" in capsys.readouterr().err
 
