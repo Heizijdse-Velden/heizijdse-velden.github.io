@@ -2,20 +2,23 @@
   "lang_name": "Türkçe",
   "dir": "ltr",
   "is_translation": true,
-
   "ui": {
     "choose_language": "Dilinizi seçin",
     "other_language": "Başka dil",
     "continue_in": "Türkçe devam et",
-    "official_info": "IOK’nin resmî bilgileri",
-    "in_dutch": "Felemenkçe",
+    "nav_open": "Açma",
+    "nav_sort": "Ne nereye?",
+    "nav_help": "Sorun mu var?",
     "label_how": "Nasıl?",
     "label_yes": "Evet",
     "label_no": "Hayır",
+    "examples": "Örnekler",
     "free": "Ücretsiz",
     "paid": "Ücretli",
     "call": "Ara",
     "email": "E-posta",
+    "in_dutch": "Felemenkçe",
+    "official_info": "IOK’nin resmî bilgileri",
     "last_reviewed": "Son kontrol",
     "link_recyclagepark": "IOK geri dönüşüm parkları",
     "link_prices": "IOK fiyatları",
@@ -23,35 +26,36 @@
     "link_manual": "IOK kullanım kılavuzu (PDF)",
     "link_iok_page": "IOK’nin yer altı konteynerleri sayfası"
   },
-
   "page_title": "Yer altı çöp konteynerleri: nasıl kullanılır",
   "intro": "Mahallemizde yer altı çöp konteynerleri var. Bunlar yalnızca evinizin giriş kartı (toegangspas) ile açılır. Burada nasıl kullanacağınızı okuyabilirsiniz.",
+  "trust": "Ücretsiz. Bu web sitesi asla para, ödeme veya kişisel bilgi istemez. Çerez yok, takip yok.",
   "translation_note": "Bu, atık şirketi IOK’nin resmî Felemenkçe açıklamasının gönüllüler tarafından yapılmış bir çevirisidir. Şüphe durumunda Felemenkçe metin geçerlidir.",
-
   "steps_title": "Konteyner nasıl açılır",
   "steps": [
-    "Doğru konteynere gidin. Ekranda “welkom, bied je pas aan” (hoş geldiniz, kartınızı gösterin) yazar.",
+    "Doğru konteynere gidin. Ekranda şu yazar: “Welkom, bied je pas aan.” (Hoş geldiniz, kartınızı gösterin.)",
     "Giriş kartınızı birkaç saniye ekranın altında tutun.",
-    "Ekranda “pas geaccepteerd” (kart kabul edildi) yazar. Kartınızı çekin ve bir adım geri çekilin.",
+    "Ekranda şu yazar: “Pas geaccepteerd.” (Kart kabul edildi.) Kartınızı çekin.",
     "Kapak kendiliğinden açılır.",
     "Çöpünüzü konteynere atın.",
     "Kapağı kapatın."
   ],
-  "safety": "Dikkat: kapak kendiliğinden açılır. Mesafenizi koruyun ve çocukları kapaktan uzak tutun.",
-
+  "video_link": "IOK videosunu izle (YouTube)",
   "containers_title": "Ne nereye atılır?",
-  "containers_intro": "Tüm konteynerler giriş kartınızla açılır. Sadece evsel çöp ücretlidir.",
+  "containers_intro": "Resmî kurallar IOK ayrıştırma rehberinde ve bettersorting.be sitesinde yer alır. Aşağıda birkaç örnek veriyoruz.",
+  "guide_link": "IOK ayrıştırma rehberi (Felemenkçe, Türkçe, Arapça)",
+  "fostplus_link": "bettersorting.be (Fost Plus, İngilizce)",
+  "containers_note": "Tüm konteynerler giriş kartınızla açılır. Sadece evsel çöp ücretlidir.",
   "fractions": {
     "rest": {
       "name": "Evsel çöp (restafval)",
-      "how": "En fazla 30 litrelik kapalı bir poşette. Açıklıktan geçtiği sürece her tür poşet olur.",
+      "how": "En fazla 30 litrelik kapalı bir poşette. Kapak sonra rahatça kapandığı sürece her tür poşet olur.",
       "yes": "Ayrıştıramadığınız çöpler.",
       "no": "PMD, kâğıt veya cam yok. Büyük eşya, elektrikli cihaz, pil, boya veya kimyasal ürün yok."
     },
     "pmd": {
       "name": "PMD",
       "subtitle": "Plastik ambalajlar, Metal ambalajlar ve İçecek kartonları",
-      "how": "Konteynere poşetsiz, tek tek atın. Ambalajları boşaltın ve iç içe koymayın.",
+      "how": "Konteynere poşetsiz, tek tek atın (mavi poşet de kullanmayın). Ambalajları boşaltın ve iç içe koymayın.",
       "yes": "Plastik şişeler, flakonlar, kaplar, kutucuklar, folyolar ve poşetler. İçecek kutuları, konserve kutuları, spreyler, kapaklar ve tıpalar. İçecek kartonları (süt, meyve suyu).",
       "no": "Ambalaj olmayan plastik eşyalar yok (oyuncak, kova). Motor yağı, boya, yapıştırıcı, tarım ilacı veya yakıt ambalajları yok."
     },
@@ -62,10 +66,8 @@
       "no": "Kirli veya yağlı kâğıt yok (pizza kutuları, patates kızartması kapları). Kâğıt havlu, kâğıt mendil, alüminyum folyo veya duvar kâğıdı yok."
     }
   },
-
   "never_title": "Çöpü asla konteynerin yanına bırakmayın",
   "never_text": "Konteyner dolu veya bozuk olsa bile. Bu yasa dışı çöp dökmedir (sluikstorten): ağır para cezası alabilirsiniz. Çöpünüzü eve geri götürün ve sorunu IOK’ye bildirin.",
-
   "faq_title": "Ne yapmalıyım, eğer…",
   "faq": {
     "blocked": {
@@ -87,8 +89,8 @@
       "a": "Giriş kartını ve kullanım kılavuzunu evde bırakın. Taşınmanızı belediyeye bildirin."
     },
     "bag": {
-      "q": "…poşetim açıklıktan geçmiyorsa?",
-      "a": "En fazla 30 litrelik daha küçük bir poşet kullanın. Poşeti asla konteynerin yanına koymayın."
+      "q": "…poşetim çok büyükse?",
+      "a": "Kapağın rahatça kapanması için daha küçük bir poşet (en fazla 30 litre) kullanın. Poşeti asla konteynerin yanına koymayın."
     },
     "elsewhere": {
       "q": "…cam, büyük eşya, elektrikli cihaz veya kimyasal atığım varsa?",
@@ -99,25 +101,14 @@
       "a": "Evsel çöp, konteyneri her kullandığınızda sabit bir ücrettir. Bu ücret evinizin çöp hesabından (DIFTAR) düşülür. PMD ve kâğıt ücretsizdir."
     }
   },
-
-  "guide_title": "Kendi dilinizde ayrıştırma rehberi",
-  "guide_text": "IOK’nin sizin dilinizde resmî bir ayrıştırma rehberi var. Hangi çöpün nereye gittiğini anlatır. Dikkat: yer altı konteynerlerinde PMD’yi mavi poşete koymadan, tek tek atarsınız.",
-  "guide_link": "IOK ayrıştırma rehberi (Felemenkçe, Türkçe, Arapça)",
-
-  "video_title": "Videoyu izleyin",
-  "video_text": "IOK, konteynerlerin nasıl çalıştığını gösteren kısa bir video hazırladı (Felemenkçe).",
-  "video_link": "Videoyu izle (YouTube)",
-
   "translate_title": "Diliniz burada yok mu?",
   "translate_intro": "Telefonunuz bu sayfayı çevirebilir:",
   "translate_android": "Android (Chrome): sağ üstteki ⋮ simgesine dokunun ve “Çevir” seçeneğini seçin.",
   "translate_iphone": "iPhone (Safari): adres çubuğunun solundaki simgeye dokunun ve “Çevir” seçeneğini seçin.",
   "translate_paper": "Kâğıt (IOK kılavuzu gibi): Google Çeviri uygulamasını açın, “Kamera”yı seçin ve kameranızı metne doğrultun.",
-
   "about_title": "Bu web sitesi hakkında",
   "about_text": "Bu, mahalledeki gönüllülerin bir girişimidir. IOK’nin veya Turnhout belediyesinin resmî web sitesi değildir.",
-  "about_no_money": "Bu web sitesi asla para, ödeme veya kişisel bilgi istemez. Bir sayfa bunları istiyor mu? O zaman bu web sitesi değildir: güvenmeyin.",
-  "about_privacy": "Çerez yok, takip yok.",
-
-  "poster_scan": "Kendi dilinizde açıklama için tarayın"
+  "about_scam": "Bir sayfa yine de para veya bilgi mi istiyor? O zaman bu web sitesi değildir. Güvenmeyin.",
+  "poster_scan": "Kendi dilinizde açıklama için tarayın",
+  "poster_safe": "Ücretsiz · asla ödeme veya kişisel bilgi istemez"
 }

@@ -5,12 +5,13 @@ from __future__ import annotations
 import io
 import re
 import shutil
+from collections.abc import Callable
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 import segno
-from jinja2 import Environment, FileSystemLoader, StrictUndefined, pass_context, select_autoescape
+from jinja2 import Environment, FileSystemLoader, StrictUndefined, select_autoescape
 from markupsafe import Markup, escape
 
 from sitegen import PACKAGE_DIR
@@ -32,30 +33,22 @@ def make_qr(url: str) -> tuple[str, bytes]:
     return svg.getvalue().decode("utf-8"), png.getvalue()
 
 
-def _dutch_terms_filter(terms: list[str]):
+def dutch_terms_filter(terms: list[str]) -> Callable[[str], Markup]:
     """Wrap literal Dutch terms (e.g. the text on the container screen) in <bdi lang="nl" dir="ltr">.
 
-    This keeps them readable in right-to-left languages and makes screen readers pronounce them
-    in Dutch. Text is escaped first, so translations can never inject HTML.
+    This keeps them readable in right-to-left languages, keeps a quoted term on one line, and makes
+    screen readers pronounce it in Dutch. Text is escaped first, so translations can't inject HTML.
     """
     if not terms:
-        pattern = None
-    else:
-        alternatives = "|".join(re.escape(str(escape(t))) for t in sorted(terms, key=len, reverse=True))
-        pattern = re.compile(f"([{OPEN_QUOTES}]?)({alternatives})([{CLOSE_QUOTES}]?)")
+        return lambda text: escape(text)
+    alternatives = "|".join(re.escape(str(escape(t))) for t in sorted(terms, key=len, reverse=True))
+    pattern = re.compile(f"([{OPEN_QUOTES}]?)({alternatives})([{CLOSE_QUOTES}]?)")
 
     def wrap(match: re.Match[str]) -> str:
         before, term, after = match.groups()
         return f'<span class="nlq">{before}<bdi lang="nl" dir="ltr">{term}</bdi>{after}</span>'
 
-    @pass_context
-    def nl(ctx: Any, text: str) -> Markup:
-        safe = str(escape(text))
-        if ctx.get("lang") == "nl" or pattern is None:
-            return Markup(safe)
-        return Markup(pattern.sub(wrap, safe))
-
-    return nl
+    return lambda text: Markup(pattern.sub(wrap, str(escape(text))))
 
 
 def make_env(content: Content) -> Environment:
@@ -66,7 +59,7 @@ def make_env(content: Content) -> Environment:
         trim_blocks=True,
         lstrip_blocks=True,
     )
-    env.filters["nl"] = _dutch_terms_filter(content.site.get("dutch_terms", []))
+    env.filters["nl"] = dutch_terms_filter(content.site.get("dutch_terms", []))
     return env
 
 
@@ -79,6 +72,7 @@ def _language_summary(code: str, t: dict[str, Any]) -> dict[str, str]:
         "choose_language": t["ui"]["choose_language"],
         "continue_in": t["ui"]["continue_in"],
         "poster_scan": t["poster_scan"],
+        "poster_safe": t["poster_safe"],
     }
 
 
@@ -104,7 +98,15 @@ def build(content: Content, out_dir: Path) -> None:
         path.write_text(env.get_template(template).render(**common, **ctx), encoding="utf-8")
 
     # Language chooser.
-    render("index.html", "index.html", lang="nl", dir="ltr", root="")
+    render(
+        "index.html",
+        "index.html",
+        lang="nl",
+        dir="ltr",
+        root="",
+        trust_nl=content.langs["nl"]["trust"],
+        trust_en=content.langs["en"]["trust"] if "en" in content.langs else "",
+    )
 
     # One page per language.
     for code in site["languages"]:
@@ -117,6 +119,7 @@ def build(content: Content, out_dir: Path) -> None:
             root="../",
             t=t,
             guide_url=site["sorting_guides"][code],
+            fostplus_url=site["fostplus_sites"][code],
         )
 
     # Poster + QR code.

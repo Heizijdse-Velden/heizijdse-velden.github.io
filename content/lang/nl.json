@@ -2,20 +2,23 @@
   "lang_name": "Nederlands",
   "dir": "ltr",
   "is_translation": false,
-
   "ui": {
     "choose_language": "Kies je taal",
     "other_language": "Andere taal",
     "continue_in": "Verder in het Nederlands",
-    "official_info": "Officiële info van IOK",
-    "in_dutch": "in het Nederlands",
+    "nav_open": "Openen",
+    "nav_sort": "Wat waar?",
+    "nav_help": "Probleem?",
     "label_how": "Hoe?",
     "label_yes": "Wel",
     "label_no": "Niet",
+    "examples": "Voorbeelden",
     "free": "Gratis",
     "paid": "Betalend",
     "call": "Bellen",
     "email": "Mailen",
+    "in_dutch": "in het Nederlands",
+    "official_info": "Officiële info van IOK",
     "last_reviewed": "Laatst nagekeken",
     "link_recyclagepark": "Recyclageparken van IOK",
     "link_prices": "Tarieven van IOK",
@@ -23,35 +26,36 @@
     "link_manual": "Handleiding van IOK (PDF)",
     "link_iok_page": "Pagina over ondergrondse containers"
   },
-
   "page_title": "Ondergrondse afvalcontainers: zo werkt het",
   "intro": "In onze buurt staan ondergrondse afvalcontainers. Ze gaan alleen open met de toegangspas van je woning. Hier lees je hoe je ze gebruikt.",
+  "trust": "Gratis. Deze website vraagt nooit om geld, een betaling of persoonlijke gegevens. Geen cookies, geen tracking.",
   "translation_note": "",
-
   "steps_title": "Zo open je de container",
   "steps": [
-    "Ga naar de juiste container. Op het scherm staat: „welkom, bied je pas aan”.",
+    "Ga naar de juiste container. Op het scherm staat: “Welkom, bied je pas aan.”",
     "Houd je toegangspas een paar seconden onder het scherm.",
-    "Op het scherm staat: „pas geaccepteerd”. Neem je pas weg en ga een stap achteruit.",
+    "Op het scherm staat: “Pas geaccepteerd.” Neem je pas weg.",
     "Het deksel gaat vanzelf open.",
     "Gooi je afval in de container.",
     "Sluit het deksel."
   ],
-  "safety": "Let op: het deksel gaat vanzelf open. Houd afstand en houd kinderen weg van het deksel.",
-
+  "video_link": "Bekijk het filmpje van IOK (YouTube)",
   "containers_title": "Wat gooi je waar?",
-  "containers_intro": "Alle containers gaan open met je toegangspas. Alleen restafval kost geld.",
+  "containers_intro": "De officiële regels staan in de sorteergids van IOK en op betersorteren.be. Hieronder geven we enkele voorbeelden.",
+  "guide_link": "Sorteergids van IOK",
+  "fostplus_link": "betersorteren.be (Fost Plus)",
+  "containers_note": "Alle containers gaan open met je toegangspas. Alleen restafval kost geld.",
   "fractions": {
     "rest": {
       "name": "Restafval",
-      "how": "In een gesloten zak van maximaal 30 liter. Elke soort zak is goed, als hij door de opening past.",
+      "how": "In een gesloten zak van maximaal 30 liter. Elke soort zak is goed, als het deksel daarna vlot dicht kan.",
       "yes": "Afval dat je niet kan sorteren.",
       "no": "Geen PMD, papier of glas. Geen grote voorwerpen, elektrische toestellen, batterijen, verf of chemische producten."
     },
     "pmd": {
       "name": "PMD",
       "subtitle": "Plastic verpakkingen, Metalen verpakkingen en Drankkartons",
-      "how": "Los in de container, niet in een zak. Maak de verpakkingen leeg en steek ze niet in elkaar.",
+      "how": "Los in de container, niet in een (blauwe) zak. Maak de verpakkingen leeg en steek ze niet in elkaar.",
       "yes": "Plastic flessen, flacons, potjes, bakjes, folies en zakjes. Blikjes, conservenblikken, spuitbussen, deksels en doppen. Drankkartons (melk, sap).",
       "no": "Geen plastic voorwerpen die geen verpakking zijn (speelgoed, emmers). Geen verpakkingen van motorolie, verf, lijm, pesticiden of brandstof."
     },
@@ -62,10 +66,8 @@
       "no": "Geen vuil of vettig papier (pizzadozen, frietbakjes). Geen keukenpapier, zakdoeken, aluminiumfolie of behangpapier."
     }
   },
-
   "never_title": "Laat nooit afval naast de container staan",
   "never_text": "Ook niet als de container vol of kapot is. Dat is sluikstorten: je kan een zware boete krijgen. Neem je afval terug mee naar huis en meld het probleem aan IOK.",
-
   "faq_title": "Wat als…",
   "faq": {
     "blocked": {
@@ -87,8 +89,8 @@
       "a": "Laat de toegangspas en de handleiding achter in de woning. Meld je verhuizing bij de stad."
     },
     "bag": {
-      "q": "…mijn zak niet door de opening past?",
-      "a": "Gebruik een kleinere zak, van maximaal 30 liter. Zet de zak nooit naast de container."
+      "q": "…mijn zak te groot is?",
+      "a": "Gebruik een kleinere zak (maximaal 30 liter), zodat het deksel vlot dicht kan. Zet de zak nooit naast de container."
     },
     "elsewhere": {
       "q": "…ik glas, grote voorwerpen, elektrische toestellen of chemisch afval heb?",
@@ -99,25 +101,14 @@
       "a": "Restafval kost een vast bedrag per keer dat je de container gebruikt. Dat gaat van de afvalrekening (DIFTAR) van je woning. PMD en papier zijn gratis."
     }
   },
-
-  "guide_title": "Sorteergids in jouw taal",
-  "guide_text": "IOK heeft een officiële sorteergids. Daarin staat welk afval waar hoort. Let op: bij de ondergrondse containers gooi je PMD los, niet in een blauwe zak.",
-  "guide_link": "Sorteerinfo van IOK",
-
-  "video_title": "Bekijk het filmpje",
-  "video_text": "IOK maakte een kort filmpje over hoe de containers werken.",
-  "video_link": "Filmpje bekijken (YouTube)",
-
   "translate_title": "Staat jouw taal er niet bij?",
   "translate_intro": "Je telefoon kan deze pagina vertalen:",
-  "translate_android": "Android (Chrome): tik op ⋮ rechtsboven en kies „Vertalen”.",
-  "translate_iphone": "iPhone (Safari): tik op het icoon links in de adresbalk en kies „Vertaal”.",
-  "translate_paper": "Papier (zoals de handleiding van IOK): open de app Google Translate, kies „Camera” en richt je camera op de tekst.",
-
+  "translate_android": "Android (Chrome): tik op ⋮ rechtsboven en kies “Vertalen”.",
+  "translate_iphone": "iPhone (Safari): tik op het icoon links in de adresbalk en kies “Vertaal”.",
+  "translate_paper": "Papier (zoals de handleiding van IOK): open de app Google Translate, kies “Camera” en richt je camera op de tekst.",
   "about_title": "Over deze website",
   "about_text": "Dit is een initiatief van vrijwilligers uit de buurt. Het is geen officiële website van IOK of de stad Turnhout.",
-  "about_no_money": "Deze website vraagt nooit om geld, een betaling of persoonlijke gegevens. Vraagt een pagina dat wel? Dan is het niet deze website: vertrouw ze niet.",
-  "about_privacy": "Geen cookies, geen tracking.",
-
-  "poster_scan": "Scan voor uitleg in jouw taal"
+  "about_scam": "Vraagt een pagina toch om geld of gegevens? Dan is het niet deze website. Vertrouw ze niet.",
+  "poster_scan": "Scan voor uitleg in jouw taal",
+  "poster_safe": "Gratis · nooit betalen · geen persoonsgegevens"
 }

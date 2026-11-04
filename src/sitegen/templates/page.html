@@ -14,8 +14,12 @@
 </div>
 {%- endmacro -%}
 
+{%- macro dutch_suffix() -%}
+{% if t.is_translation %} <small>· {{ t.ui.in_dutch }}</small>{% endif %}
+{%- endmacro -%}
+
 {%- macro ext_link(url, label) -%}
-<a class="link-row" href="{{ url }}" rel="noopener noreferrer"><span>{{ label }}{% if t.is_translation %} <small>· {{ t.ui.in_dutch }}</small>{% endif %}</span>{{ icon('external', 'icon-sm') }}</a>
+<a class="link-row" href="{{ url }}" rel="noopener noreferrer"><span>{{ label }}{{ dutch_suffix() }}</span>{{ icon('external', 'icon-sm') }}</a>
 {%- endmacro -%}
 
 {% block body %}
@@ -29,9 +33,20 @@
 <main class="wrap">
   <h1>{{ t.page_title|nl }}</h1>
   <p class="lead">{{ t.intro|nl }}</p>
+
+  <p class="trust" role="note">
+    <span class="trust-icons" aria-hidden="true">{{ icon('nomoney') }}{{ icon('nodata') }}{{ icon('notrack') }}</span>
+    <span>{{ t.trust }}</span>
+  </p>
   {% if t.is_translation %}<p class="note">{{ t.translation_note|nl }}</p>{% endif %}
 
-  <section aria-labelledby="h-steps">
+  <nav class="quicknav" aria-label="{{ t.page_title }}">
+    <a href="#open">{{ icon('step4', 'icon-sm') }}<span>{{ t.ui.nav_open }}</span></a>
+    <a href="#sort">{{ icon('pmd', 'icon-sm') }}<span>{{ t.ui.nav_sort }}</span></a>
+    <a href="#help">{{ icon('warn', 'icon-sm') }}<span>{{ t.ui.nav_help }}</span></a>
+  </nav>
+
+  <section id="open" aria-labelledby="h-steps">
     <h2 id="h-steps">{{ t.steps_title }}</h2>
     <ol class="steps">
       {% for s in t.steps %}
@@ -42,12 +57,19 @@
       </li>
       {% endfor %}
     </ol>
-    <div class="callout callout-caution" role="note">{{ icon('warn', 'icon-md') }}<p>{{ t.safety }}</p></div>
+    <a class="video-link" href="{{ site.links.iok_video }}" rel="noopener noreferrer">{{ icon('play', 'icon-sm') }}<span>{{ t.video_link }}{{ dutch_suffix() }}</span></a>
   </section>
 
-  <section aria-labelledby="h-containers">
+  <section id="sort" aria-labelledby="h-containers">
     <h2 id="h-containers">{{ t.containers_title }}</h2>
-    <p>{{ t.containers_intro|nl }}</p>
+    <div class="reference">
+      <p>{{ t.containers_intro|nl }}</p>
+      <div class="reference-links">
+        <a class="btn btn-primary" href="{{ guide_url }}" rel="noopener noreferrer">{{ icon('book', 'icon-xs') }}<span>{{ t.guide_link }}</span></a>
+        <a class="btn" href="{{ fostplus_url }}" rel="noopener noreferrer">{{ icon('external', 'icon-xs') }}<span>{{ t.fostplus_link }}</span></a>
+      </div>
+    </div>
+    <p>{{ t.containers_note|nl }}</p>
     <div class="fractions">
       {% for key in ['rest', 'pmd', 'paper'] %}{% set f = t.fractions[key] %}
       <article class="fraction fraction-{{ key }}">
@@ -61,8 +83,11 @@
         </header>
         <div class="fraction-body">
           <p class="how"><strong>{{ t.ui.label_how }}</strong> {{ f.how|nl }}</p>
-          <p class="yes">{{ icon('check', 'icon-xs') }}<span><strong>{{ t.ui.label_yes }}:</strong> {{ f.yes|nl }}</span></p>
-          <p class="no">{{ icon('cross', 'icon-xs') }}<span><strong>{{ t.ui.label_no }}:</strong> {{ f.no|nl }}</span></p>
+          <details class="examples">
+            <summary>{{ t.ui.examples }}</summary>
+            <p class="yes">{{ icon('check', 'icon-xs') }}<span><strong>{{ t.ui.label_yes }}:</strong> {{ f.yes|nl }}</span></p>
+            <p class="no">{{ icon('cross', 'icon-xs') }}<span><strong>{{ t.ui.label_no }}:</strong> {{ f.no|nl }}</span></p>
+          </details>
         </div>
       </article>
       {% endfor %}
@@ -78,7 +103,7 @@
     </div>
   </section>
 
-  <section aria-labelledby="h-faq">
+  <section id="help" aria-labelledby="h-faq">
     <h2 id="h-faq">{{ t.faq_title }}</h2>
     <div class="faq">
       {% set faq_icons = {'blocked': 'warn', 'lost': 'pass', 'moved_in': 'home', 'moving_out': 'home', 'bag': 'bag', 'elsewhere': 'van', 'cost': 'euro'} %}
@@ -99,39 +124,22 @@
     </div>
   </section>
 
-  <section class="cards" aria-label="{{ t.guide_title }}, {{ t.video_title }}">
-    <article class="card">
-      {{ icon('book', 'icon-md') }}
-      <h2>{{ t.guide_title }}</h2>
-      <p>{{ t.guide_text|nl }}</p>
-      <a class="btn btn-primary" href="{{ guide_url }}" rel="noopener noreferrer">{{ t.guide_link }}{{ icon('external', 'icon-xs') }}</a>
-    </article>
-    <article class="card">
-      {{ icon('play', 'icon-md') }}
-      <h2>{{ t.video_title }}</h2>
-      <p>{{ t.video_text }}</p>
-      <a class="btn" href="{{ site.links.iok_video }}" rel="noopener noreferrer">{{ t.video_link }}{{ icon('external', 'icon-xs') }}</a>
-    </article>
-  </section>
-
-  <section class="card" aria-labelledby="h-translate">
-    {{ icon('translate', 'icon-md') }}
-    <h2 id="h-translate">{{ t.translate_title }}</h2>
+  <details class="card translate">
+    <summary>{{ icon('translate', 'icon-md') }}<span>{{ t.translate_title }}</span></summary>
     <p>{{ t.translate_intro }}</p>
     <ul class="tips">
       <li>{{ t.translate_android }}</li>
       <li>{{ t.translate_iphone }}</li>
       <li>{{ t.translate_paper }}</li>
     </ul>
-    <a class="btn" href="{{ root }}" hreflang="x-default">{{ icon('globe', 'icon-xs') }}{{ t.ui.choose_language }}</a>
-  </section>
+    <a class="btn" href="{{ root }}" hreflang="x-default">{{ icon('globe', 'icon-xs') }}<span>{{ t.ui.choose_language }}</span></a>
+  </details>
 
   <section class="card about" aria-labelledby="h-about">
     {{ icon('shield', 'icon-md') }}
     <h2 id="h-about">{{ t.about_title }}</h2>
     <p>{{ t.about_text }}</p>
-    <p class="strong">{{ t.about_no_money }}</p>
-    <p class="muted">{{ t.about_privacy }}</p>
+    <p class="strong">{{ t.about_scam }}</p>
     <h3>{{ t.ui.official_info }}</h3>
     {{ ext_link(site.links.iok_containers, t.ui.link_iok_page) }}
     {{ ext_link(site.links.iok_manual_pdf, t.ui.link_manual) }}

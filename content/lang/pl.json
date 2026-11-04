@@ -2,20 +2,23 @@
   "lang_name": "Polski",
   "dir": "ltr",
   "is_translation": true,
-
   "ui": {
     "choose_language": "Wybierz język",
     "other_language": "Inny język",
     "continue_in": "Kontynuuj po polsku",
-    "official_info": "Oficjalne informacje IOK",
-    "in_dutch": "po niderlandzku",
+    "nav_open": "Otwieranie",
+    "nav_sort": "Co gdzie?",
+    "nav_help": "Problem?",
     "label_how": "Jak?",
     "label_yes": "Tak",
     "label_no": "Nie",
+    "examples": "Przykłady",
     "free": "Bezpłatnie",
     "paid": "Płatne",
     "call": "Zadzwoń",
     "email": "E-mail",
+    "in_dutch": "po niderlandzku",
+    "official_info": "Oficjalne informacje IOK",
     "last_reviewed": "Ostatnio sprawdzono",
     "link_recyclagepark": "Punkty recyklingu IOK",
     "link_prices": "Cennik IOK",
@@ -23,35 +26,36 @@
     "link_manual": "Instrukcja IOK (PDF)",
     "link_iok_page": "Strona IOK o kontenerach podziemnych"
   },
-
   "page_title": "Podziemne kontenery na odpady: jak to działa",
   "intro": "W naszej okolicy stoją podziemne kontenery na odpady. Otwierają się tylko kartą dostępu (toegangspas) przypisaną do twojego mieszkania. Tutaj przeczytasz, jak z nich korzystać.",
+  "trust": "Bezpłatnie. Ta strona nigdy nie prosi o pieniądze, płatność ani dane osobowe. Bez plików cookie, bez śledzenia.",
   "translation_note": "To jest wolontariackie tłumaczenie oficjalnych niderlandzkich wyjaśnień IOK, firmy zajmującej się odpadami. W razie wątpliwości obowiązuje tekst niderlandzki.",
-
   "steps_title": "Jak otworzyć kontener",
   "steps": [
-    "Podejdź do właściwego kontenera. Na ekranie widać napis „welkom, bied je pas aan” (witamy, przyłóż kartę).",
+    "Podejdź do właściwego kontenera. Na ekranie widać napis: “Welkom, bied je pas aan.” (Witamy, przyłóż kartę.)",
     "Przytrzymaj kartę dostępu pod ekranem przez kilka sekund.",
-    "Na ekranie pojawi się napis „pas geaccepteerd” (karta zaakceptowana). Zabierz kartę i cofnij się o krok.",
+    "Na ekranie pojawi się napis: “Pas geaccepteerd.” (Karta zaakceptowana.) Zabierz kartę.",
     "Pokrywa otworzy się sama.",
     "Wrzuć odpady do kontenera.",
     "Zamknij pokrywę."
   ],
-  "safety": "Uwaga: pokrywa otwiera się sama. Zachowaj odstęp i trzymaj dzieci z dala od pokrywy.",
-
+  "video_link": "Obejrzyj film IOK (YouTube)",
   "containers_title": "Co gdzie wyrzucać?",
-  "containers_intro": "Wszystkie kontenery otwierają się kartą dostępu. Płaci się tylko za odpady zmieszane.",
+  "containers_intro": "Oficjalne zasady znajdziesz w przewodniku sortowania IOK i na stronie bettersorting.be. Poniżej kilka przykładów.",
+  "guide_link": "Przewodnik sortowania IOK (niderlandzki, polski, rosyjski)",
+  "fostplus_link": "bettersorting.be (Fost Plus, po angielsku)",
+  "containers_note": "Wszystkie kontenery otwierają się kartą dostępu. Płaci się tylko za odpady zmieszane.",
   "fractions": {
     "rest": {
       "name": "Odpady zmieszane (restafval)",
-      "how": "W zamkniętym worku o pojemności maksymalnie 30 litrów. Może być każdy worek, jeśli zmieści się w otworze.",
+      "how": "W zamkniętym worku o pojemności maksymalnie 30 litrów. Może być każdy worek, jeśli pokrywa potem łatwo się zamyka.",
       "yes": "Odpady, których nie da się posortować.",
       "no": "Bez PMD, papieru i szkła. Bez dużych przedmiotów, urządzeń elektrycznych, baterii, farb i chemikaliów."
     },
     "pmd": {
       "name": "PMD",
       "subtitle": "Opakowania z Plastiku, opakowania Metalowe i kartony po napojach (Drankkartons)",
-      "how": "Luzem do kontenera, nie w worku. Opróżnij opakowania i nie wkładaj ich jedno w drugie.",
+      "how": "Luzem do kontenera, nie w (niebieskim) worku. Opróżnij opakowania i nie wkładaj ich jedno w drugie.",
       "yes": "Plastikowe butelki, flakony, kubeczki, tacki, folie i torebki. Puszki, puszki po konserwach, aerozole, pokrywki i nakrętki. Kartony po napojach (mleko, sok).",
       "no": "Bez plastikowych przedmiotów, które nie są opakowaniami (zabawki, wiadra). Bez opakowań po oleju silnikowym, farbach, klejach, pestycydach i paliwie."
     },
@@ -62,10 +66,8 @@
       "no": "Bez brudnego lub tłustego papieru (pudełka po pizzy, tacki po frytkach). Bez ręczników papierowych, chusteczek, folii aluminiowej i tapet."
     }
   },
-
   "never_title": "Nigdy nie zostawiaj odpadów obok kontenera",
   "never_text": "Nawet jeśli kontener jest pełny lub zepsuty. To nielegalne wyrzucanie odpadów (sluikstorten): grozi za to wysoka grzywna. Zabierz odpady z powrotem do domu i zgłoś problem do IOK.",
-
   "faq_title": "Co zrobić, jeśli…",
   "faq": {
     "blocked": {
@@ -87,8 +89,8 @@
       "a": "Zostaw kartę dostępu i instrukcję w mieszkaniu. Zgłoś przeprowadzkę w urzędzie miasta."
     },
     "bag": {
-      "q": "…mój worek nie mieści się w otworze?",
-      "a": "Użyj mniejszego worka, maksymalnie 30 litrów. Nigdy nie stawiaj worka obok kontenera."
+      "q": "…mój worek jest za duży?",
+      "a": "Użyj mniejszego worka (maksymalnie 30 litrów), żeby pokrywa łatwo się zamykała. Nigdy nie stawiaj worka obok kontenera."
     },
     "elsewhere": {
       "q": "…mam szkło, duże przedmioty, urządzenia elektryczne lub odpady chemiczne?",
@@ -99,25 +101,14 @@
       "a": "Za odpady zmieszane płacisz stałą kwotę za każde użycie kontenera. Kwota jest pobierana z konta odpadów (DIFTAR) twojego mieszkania. PMD i papier są bezpłatne."
     }
   },
-
-  "guide_title": "Przewodnik sortowania w twoim języku",
-  "guide_text": "IOK ma oficjalny przewodnik sortowania w twoim języku. Wyjaśnia, które odpady gdzie wyrzucać. Uwaga: do kontenerów podziemnych PMD wrzucasz luzem, nie w niebieskim worku.",
-  "guide_link": "Przewodnik sortowania IOK (niderlandzki, polski, rosyjski)",
-
-  "video_title": "Obejrzyj film",
-  "video_text": "IOK nagrało krótki film o tym, jak działają kontenery (po niderlandzku).",
-  "video_link": "Obejrzyj film (YouTube)",
-
   "translate_title": "Nie ma tu twojego języka?",
   "translate_intro": "Twój telefon może przetłumaczyć tę stronę:",
   "translate_android": "Android (Chrome): dotknij ⋮ w prawym górnym rogu i wybierz „Przetłumacz”.",
   "translate_iphone": "iPhone (Safari): dotknij ikony po lewej stronie paska adresu i wybierz „Przetłumacz”.",
   "translate_paper": "Papier (np. instrukcja IOK): otwórz aplikację Tłumacz Google, wybierz „Aparat” i skieruj aparat na tekst.",
-
   "about_title": "O tej stronie",
   "about_text": "To inicjatywa wolontariuszy z okolicy. To nie jest oficjalna strona IOK ani miasta Turnhout.",
-  "about_no_money": "Ta strona nigdy nie prosi o pieniądze, płatność ani dane osobowe. Jakaś strona o to prosi? To nie jest ta strona: nie ufaj jej.",
-  "about_privacy": "Bez plików cookie, bez śledzenia.",
-
-  "poster_scan": "Zeskanuj – wyjaśnienie w twoim języku"
+  "about_scam": "Jakaś strona mimo to prosi o pieniądze lub dane? To nie jest ta strona. Nie ufaj jej.",
+  "poster_scan": "Zeskanuj – wyjaśnienie w twoim języku",
+  "poster_safe": "Bezpłatnie · nigdy nie prosi o płatność ani dane osobowe"
 }

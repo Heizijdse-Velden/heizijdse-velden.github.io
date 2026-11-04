@@ -5,7 +5,7 @@
 {% block head %}<link rel="stylesheet" href="{{ root }}static/poster.css?v={{ build_id }}">{% endblock %}
 {% block bodyclass %}poster-page{% endblock %}
 {% block body %}
-<p class="print-hint">Afdrukken: A4, staand, marges „geen”, achtergrondafbeeldingen aan. Controleer eerst of de QR-code naar <strong>{{ site_host }}</strong> leidt.</p>
+<p class="print-hint">Afdrukken: A4, staand, marges “geen”, achtergrondafbeeldingen aan. Controleer eerst of de QR-code naar <strong>{{ site_host }}</strong> leidt.</p>
 <div class="sheet">
   <header class="p-head">
     <div>
@@ -21,9 +21,9 @@
   </section>
 
   <section class="p-row p-fractions">
-    <div class="p-frac p-frac-rest">{{ icon('rest') }}<h2>{{ p.rest_name }}</h2><p>{{ p.rest_rule }}</p><span class="p-badge">€</span></div>
-    <div class="p-frac p-frac-pmd">{{ icon('pmd') }}<h2>{{ p.pmd_name }}</h2><p>{{ p.pmd_rule }}</p></div>
-    <div class="p-frac p-frac-paper">{{ icon('paper') }}<h2>{{ p.paper_name }}</h2><p>{{ p.paper_rule }}</p></div>
+    <div class="p-frac p-frac-rest">{{ icon('rest') }}<div><h2>{{ p.rest_name }}</h2><p>{{ p.rest_rule }}</p></div><span class="p-badge">€</span></div>
+    <div class="p-frac p-frac-pmd">{{ icon('pmd') }}<div><h2>{{ p.pmd_name }}</h2><p>{{ p.pmd_rule }}</p></div></div>
+    <div class="p-frac p-frac-paper">{{ icon('paper') }}<div><h2>{{ p.paper_name }}</h2><p>{{ p.paper_rule }}</p></div></div>
   </section>
 
   <section class="p-never">
@@ -34,15 +34,23 @@
     </div>
   </section>
 
-  <section class="p-qr">
-    <div class="qr" role="img" aria-label="QR-code naar {{ site_host }}">{{ qr_svg|safe }}</div>
-    <div class="p-qr-text">
-      <p class="p-scan-main">{{ icon('translate', 'p-scan-icon') }}<span>{{ nl_scan }}</span></p>
-      <ul class="p-scan-list">
-        {% for l in langs if l.code != 'nl' %}<li lang="{{ l.code }}" dir="{{ l.dir }}">{{ l.poster_scan }}</li>{% endfor %}
-      </ul>
-      <p class="p-url">{{ site_host }}</p>
+  <section class="p-scan">
+    <p class="p-scan-main">{{ icon('translate', 'p-scan-icon') }}<span>{{ nl_scan }}</span></p>
+    <div class="p-scan-body">
+      <div class="qr" role="img" aria-label="QR-code naar {{ site_host }}">{{ qr_svg|safe }}</div>
+      <div class="p-scan-side">
+        <p class="p-trust-title">{{ p.trust_title }}</p>
+        <ul class="p-trust">
+          <li>{{ icon('nomoney') }}<span>{{ p.trust_money }}</span></li>
+          <li>{{ icon('nodata') }}<span>{{ p.trust_data }}</span></li>
+          <li>{{ icon('notrack') }}<span>{{ p.trust_tracking }}</span></li>
+        </ul>
+        <p class="p-url">{{ site_host }}</p>
+      </div>
     </div>
+    <ul class="p-scan-list">
+      {% for l in langs if l.code != 'nl' %}<li lang="{{ l.code }}" dir="{{ l.dir }}"><strong>{{ l.poster_scan }}</strong><span>{{ l.poster_safe }}</span></li>{% endfor %}
+    </ul>
   </section>
 
   <footer class="p-foot">

@@ -1,6 +1,6 @@
-# Lint, test and build on every push and pull request; deploy to GitHub Pages from main.
+# Lint, audit, test and build on every push and pull request; deploy to GitHub Pages from main.
 # If anything fails, the previous version stays online.
-# Actions are pinned to commit SHAs (setup-uv has no floating major tags).
+# Actions are pinned to commit SHAs; Dependabot keeps them up to date.
 name: Deploy
 
 on:
@@ -10,22 +10,32 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: read # read the repository, nothing else
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: pages-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
+    name: build
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      REQUIRE_E2E: "1" # browser tests must run in CI, not be skipped
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
       - name: Lint
         run: |
           uv run --locked ruff check
           uv run --locked ruff format --check
+      - name: Audit workflows (zizmor)
+        run: uv run --locked zizmor --offline .github/workflows
+      - name: Install Chromium for browser tests
+        run: uv run --locked playwright install --with-deps chromium
       - name: Test
         run: uv run --locked pytest
       - name: Build
@@ -35,12 +45,14 @@ jobs:
           path: _site
 
   deploy:
+    name: deploy
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
-      pages: write
-      id-token: write
+      pages: write # publish to GitHub Pages
+      id-token: write # prove to Pages that this run is allowed to deploy
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
