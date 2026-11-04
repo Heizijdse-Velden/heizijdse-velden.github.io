@@ -179,12 +179,16 @@ LABEL_ROOM = """(selector) => [...document.querySelectorAll(selector)].map((butt
 
 @pytest.mark.parametrize(
     ("selector", "path", "width"),
-    [(".quicknav a", "/{code}/", 320), (".lang-btn", "/", 361), (".lang-btn", "/", 375)],
+    [(".quicknav a", "/{code}/", 360), (".lang-btn", "/", 361), (".lang-btn", "/", 375)],
 )
 def test_button_labels_fit_without_breaking_words(
     content: Content, base_url: str, new_page: NewPage, selector: str, path: str, width: int
 ) -> None:
-    """Short labels must fit whole; CSS only hyphenates as a last resort."""
+    """Button labels fit whole on common phones (360px and up).
+
+    Narrower screens never scroll sideways (see above) but may hyphenate a long word. The CI runner
+    renders with DejaVu Sans, which is wider than phone fonts, so this test is stricter there.
+    """
     too_long = []
     for code in content.site["languages"] if "{code}" in path else ["nl"]:
         page = new_page(viewport={"width": width, "height": 800})
