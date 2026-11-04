@@ -1,29 +1,35 @@
-"""What a visitor does in a real browser: choose a language, navigate, open answers.
+"""What a visitor does in a real browser: choose a language, navigate, open answers. And the poster PDF.
 
-Needs Chromium: `uv run playwright install chromium` (skipped locally if missing, required in CI).
+Needs Chromium: ``uv run playwright install chromium`` (skipped locally if missing, required in CI).
 """
 
 from __future__ import annotations
 
-from collections.abc import Iterator
-from typing import Any
+import re
+from collections.abc import Callable, Iterator
+from pathlib import Path
 
 import pytest
+from playwright.sync_api import Browser, BrowserContext, Page, ViewportSize
 
+from sitegen.build import POSTER_PAGE
 from sitegen.content import Content
+from sitegen.poster import print_pdf
 
 pytestmark = pytest.mark.e2e
 
-PHONE = {"width": 390, "height": 844}
-SMALL_PHONE = {"width": 320, "height": 640}
+PHONE: ViewportSize = {"width": 390, "height": 844}
+SMALL_PHONE: ViewportSize = {"width": 320, "height": 640}
+
+NewPage = Callable[..., Page]
 
 
 @pytest.fixture
-def new_page(browser: Any) -> Iterator[Any]:
-    """Factory for a fresh phone-sized page; every context is closed afterwards."""
-    contexts = []
+def new_page(browser: Browser) -> Iterator[NewPage]:
+    """Make fresh phone-sized pages; their contexts are closed afterwards."""
+    contexts: list[BrowserContext] = []
 
-    def make(locale: str = "nl-BE", viewport: dict[str, int] = PHONE) -> Any:
+    def make(locale: str = "nl-BE", viewport: ViewportSize = PHONE) -> Page:
         context = browser.new_context(locale=locale, viewport=viewport)
         contexts.append(context)
         return context.new_page()
@@ -33,14 +39,14 @@ def new_page(browser: Any) -> Iterator[Any]:
         context.close()
 
 
-def test_chooser_lists_every_language(content: Content, base_url: str, new_page: Any) -> None:
+def test_chooser_lists_every_language(content: Content, base_url: str, new_page: NewPage) -> None:
     page = new_page()
     page.goto(base_url + "/")
-    codes = page.locator("a.lang-btn").evaluate_all("els => els.map(e => e.getAttribute('lang'))")
+    codes = page.locator("a.lang-btn").evaluate_all("links => links.map(link => link.lang)")
     assert codes == content.site["languages"]
 
 
-def test_choosing_a_language_opens_that_page(content: Content, base_url: str, new_page: Any) -> None:
+def test_choosing_a_language_opens_that_page(content: Content, base_url: str, new_page: NewPage) -> None:
     page = new_page()
     page.goto(base_url + "/")
     page.locator('a.lang-btn[lang="tr"]').click()
@@ -49,7 +55,7 @@ def test_choosing_a_language_opens_that_page(content: Content, base_url: str, ne
     assert page.locator("h1").inner_text() == content.langs["tr"]["page_title"]
 
 
-def test_other_language_button_returns_to_chooser(base_url: str, new_page: Any) -> None:
+def test_other_language_button_returns_to_chooser(base_url: str, new_page: NewPage) -> None:
     page = new_page()
     page.goto(base_url + "/pl/")
     page.locator("a.lang-switch").click()
@@ -59,7 +65,7 @@ def test_other_language_button_returns_to_chooser(base_url: str, new_page: Any) 
 
 @pytest.mark.parametrize(("locale", "expected"), [("ro-RO", "ro"), ("ar-MA", "ar"), ("sw-KE", None)])
 def test_chooser_suggests_the_phone_language(
-    content: Content, base_url: str, new_page: Any, locale: str, expected: str | None
+    content: Content, base_url: str, new_page: NewPage, locale: str, expected: str | None
 ) -> None:
     page = new_page(locale=locale)
     page.goto(base_url + "/")
@@ -67,26 +73,28 @@ def test_chooser_suggests_the_phone_language(
     if expected is None:
         assert visible.count() == 0
     else:
-        assert visible.count() == 1
         assert visible.get_attribute("data-lang") == expected
         assert visible.inner_text().strip() == content.langs[expected]["ui"]["continue_in"]
 
 
-def test_arabic_page_reads_right_to_left(base_url: str, new_page: Any) -> None:
+def test_arabic_page_reads_right_to_left(base_url: str, new_page: NewPage) -> None:
     page = new_page()
     page.goto(base_url + "/ar/")
     assert page.locator("html").get_attribute("dir") == "rtl"
 
 
-def test_trust_message_is_visible_without_scrolling(content: Content, base_url: str, new_page: Any) -> None:
-    for code in content.site["languages"]:
+def test_trust_message_is_visible_without_scrolling(
+    content: Content, base_url: str, new_page: NewPage
+) -> None:
+    for path in ["/", *(f"/{code}/" for code in content.site["languages"])]:
         page = new_page()
-        page.goto(f"{base_url}/{code}/")
+        page.goto(base_url + path)
         box = page.locator(".trust").bounding_box()
-        assert box is not None and box["y"] + box["height"] <= PHONE["height"], code
+        assert box is not None, path
+        assert box["y"] + box["height"] <= PHONE["height"], path
 
 
-def test_quick_navigation_jumps_to_section(base_url: str, new_page: Any) -> None:
+def test_quick_navigation_jumps_to_section(base_url: str, new_page: NewPage) -> None:
     page = new_page()
     page.goto(base_url + "/en/")
     page.locator('.quicknav a[href="#help"]').click()
@@ -95,7 +103,7 @@ def test_quick_navigation_jumps_to_section(base_url: str, new_page: Any) -> None
     assert page.evaluate("window.scrollY") > 0
 
 
-def test_question_opens_with_call_button(base_url: str, new_page: Any) -> None:
+def test_question_opens_with_call_button(base_url: str, new_page: NewPage) -> None:
     page = new_page()
     page.goto(base_url + "/nl/")
     question = page.locator("details#lost")
@@ -105,34 +113,98 @@ def test_question_opens_with_call_button(base_url: str, new_page: Any) -> None:
     assert question.locator('a[href^="tel:"]').is_visible()
 
 
-def test_unknown_url_shows_the_custom_404_page(base_url: str, new_page: Any) -> None:
+def test_wrong_url_leads_to_every_language_in_one_tap(base_url: str, new_page: NewPage) -> None:
     page = new_page()
-    response = page.goto(base_url + "/does-not-exist/")
-    assert response is not None and response.status == 404
-    assert page.locator('link[rel="stylesheet"]').count() == 1
-    assert page.locator("h1").is_visible()
+    response = page.goto(base_url + "/old/link/")
+    assert response is not None
+    assert response.status == 404
+    assert page.locator(".not-found").is_visible()
+    page.locator('a.lang-btn[lang="fr"]').click()
+    page.wait_for_url(base_url + "/fr/")
 
 
-def _all_pages(content: Content) -> list[str]:
-    return ["/", "/affiche/", "/404.html"] + [f"/{code}/" for code in content.site["languages"]]
+def _watch_errors(page: Page) -> list[str]:
+    """Collect console errors (incl. Content-Security-Policy violations, missing files) and crashes."""
+    errors: list[str] = []
+    page.on("console", lambda msg: errors.append(msg.text) if msg.type == "error" else None)
+    page.on("pageerror", lambda exc: errors.append(str(exc)))
+    return errors
 
 
-def test_no_console_errors_or_horizontal_scroll(content: Content, base_url: str, new_page: Any) -> None:
-    """Console errors include Content-Security-Policy violations and missing files."""
+def test_no_console_errors_or_horizontal_scroll(content: Content, base_url: str, new_page: NewPage) -> None:
     problems = []
-    for path in _all_pages(content):
+    for path in ["/", "/404.html", "/affiche/", *(f"/{code}/" for code in content.site["languages"])]:
         page = new_page(viewport=SMALL_PHONE)
-        errors: list[str] = []
-        page.on(
-            "console", lambda msg, errors=errors: errors.append(msg.text) if msg.type == "error" else None
-        )
-        page.on("pageerror", lambda exc, errors=errors: errors.append(str(exc)))
+        errors = _watch_errors(page)
         page.goto(base_url + path)
         page.wait_for_load_state("networkidle")
         if errors:
             problems.append(f"{path}: {errors}")
-        if path != "/affiche/":  # the poster is an A4 sheet by design
-            overflow = page.evaluate("document.documentElement.scrollWidth - window.innerWidth")
-            if overflow > 0:
-                problems.append(f"{path}: {overflow}px horizontal scroll at 320px")
+        overflow = page.evaluate("document.documentElement.scrollWidth - window.innerWidth")
+        if path != "/affiche/" and overflow > 0:  # the poster is an A4 sheet by design
+            problems.append(
+                f"{path}: {overflow}px horizontal scroll at 320px, caused by {page.evaluate(WIDEST)}"
+            )
     assert problems == []
+
+
+#: Describe the element that sticks out furthest to the right, to make an overflow easy to fix.
+WIDEST = """() => {
+  let widest = null;
+  for (const el of document.body.querySelectorAll("*")) {
+    const right = el.getBoundingClientRect().right;
+    if (!widest || right > widest.right) widest = {right, el};
+  }
+  const el = widest.el;
+  const text = (el.textContent || "").trim().slice(0, 40);
+  return `<${el.tagName.toLowerCase()} class="${el.getAttribute("class") || ""}"> ${text}`;
+}"""
+
+#: For every button label: its longest word, and the room the button has for it.
+LABEL_ROOM = """(selector) => [...document.querySelectorAll(selector)].map((button) => {
+  const label = button.querySelector("span");
+  const style = getComputedStyle(button);
+  let room = button.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+  if (style.flexDirection === "row") {
+    for (const other of button.children) {
+      if (other !== label) room -= other.getBoundingClientRect().width + parseFloat(style.columnGap || "0");
+    }
+  }
+  const context = document.createElement("canvas").getContext("2d");
+  context.font = getComputedStyle(label).font;
+  const longest = Math.max(...label.textContent.split(/\\s+/).map((word) => context.measureText(word).width));
+  return {text: label.textContent, longest: Math.ceil(longest), room: Math.floor(room)};
+})"""
+
+
+@pytest.mark.parametrize(
+    ("selector", "path", "width"),
+    [(".quicknav a", "/{code}/", 360), (".lang-btn", "/", 361), (".lang-btn", "/", 375)],
+)
+def test_button_labels_fit_without_breaking_words(
+    content: Content, base_url: str, new_page: NewPage, selector: str, path: str, width: int
+) -> None:
+    """Button labels fit whole on common phones (360px and up).
+
+    Narrower screens never scroll sideways (see above) but may hyphenate a long word. The CI runner
+    renders with DejaVu Sans, which is wider than phone fonts, so this test is stricter there.
+    """
+    too_long = []
+    for code in content.site["languages"] if "{code}" in path else ["nl"]:
+        page = new_page(viewport={"width": width, "height": 800})
+        page.goto(base_url + path.format(code=code))
+        too_long += [
+            f"{code}: {label['text']!r} needs {label['longest']}px, has {label['room']}px"
+            for label in page.evaluate(LABEL_ROOM, selector)
+            if label["longest"] > label["room"]
+        ]
+    assert too_long == []
+
+
+def test_poster_prints_as_a_single_a4_page(site: Path, browser: Browser, tmp_path: Path) -> None:
+    pdf = tmp_path / "out" / "affiche.pdf"
+    print_pdf(browser, site / POSTER_PAGE, pdf)
+    data = pdf.read_bytes()
+    assert data.startswith(b"%PDF")
+    assert len(re.findall(rb"/Type\s*/Page\b", data)) == 1
+    assert re.search(rb"/MediaBox\s*\[\s*0 0 59[45]\.\d+ 84[12]\.\d+\s*\]", data), "not A4"

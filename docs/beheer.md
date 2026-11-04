@@ -4,7 +4,7 @@
 
 | Wanneer | Wat |
 |---|---|
-| Elke PR en push | Lint (ruff), audit van de workflows (zizmor), tests (inhoud, HTML, browser), build |
+| Elke PR en push | Codestijl (ruff), types (mypy), audit van de workflows (zizmor), tests met minstens 95% dekking, build |
 | Merge naar `main` | Publicatie op GitHub Pages, alleen als alles groen is |
 | Elke maandag | Check van alle externe links (IOK, Fost Plus, YouTube). Bij een fout krijg je een mail van GitHub. |
 | Elke maand | Dependabot-PR's voor GitHub Actions en Python-pakketten (minstens 7 dagen oud) |
@@ -15,6 +15,13 @@
 - Zet `last_reviewed` in `content/site.json` op de datum van vandaag.
 - Controleer de affiches ter plaatse: is er geen sticker over de QR-code geplakt? Scan ze.
 
+## Affiches drukken
+
+1. `uv run sitegen poster` maakt `outputs/affiche.pdf`. Scan de QR-code voor je print.
+2. Zet een tag op de versie die je drukt, bv. `git tag affiche-2026-11 && git push --tags`. Zo weet je later altijd welke tekst (URL, telefoonnummer, V.U.) er op straat hangt.
+
+Releases zijn verder niet nodig: elke merge naar `main` is meteen de live versie, en de commitgeschiedenis is het logboek.
+
 ## Vertalingen
 
 De vertalingen zijn een eerste versie, gemaakt met AI. Laat elke taal nalezen door iemand die ze als moedertaal spreekt. Let daarbij op:
@@ -22,6 +29,7 @@ De vertalingen zijn een eerste versie, gemaakt met AI. Laat elke taal nalezen do
 - eenvoudige taal (A2–B1);
 - de termen *toegangspas*, *restafval*, *PMD* en *recyclagepark*;
 - de Nederlandse schermteksten (“Welkom, bied je pas aan.”) moeten letterlijk blijven staan.
+- Frans: vóór `? ! : ;` hoort een vaste spatie (no-break space), geen gewone spatie. Een test controleert dat.
 
 Pas je een Nederlandse tekst aan? Pas dan ook dezelfde sleutel aan in de andere talen. De tests controleren dat elke sleutel bestaat, maar niet of de inhoud nog klopt.
 

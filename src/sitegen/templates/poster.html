@@ -2,10 +2,10 @@
 {% from "_icons.html" import icon %}
 {% block title %}Affiche · {{ p.title }}{% endblock %}
 {% block description %}Printbare A4-affiche met QR-code.{% endblock %}
-{% block head %}<link rel="stylesheet" href="{{ root }}static/poster.css?v={{ build_id }}">{% endblock %}
-{% block bodyclass %}poster-page{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ root }}static/poster.css?v={{ asset_version }}">{% endblock %}
+{% block body_class %} class="poster-page"{% endblock %}
 {% block body %}
-<p class="print-hint">Afdrukken: A4, staand, marges “geen”, achtergrondafbeeldingen aan. Controleer eerst of de QR-code naar <strong>{{ site_host }}</strong> leidt.</p>
+<p class="print-hint">{{ p.print_hint }} <strong>{{ site_host }}</strong></p>
 <div class="sheet">
   <header class="p-head">
     <div>
@@ -14,9 +14,9 @@
     </div>
   </header>
 
-  <section class="p-row p-open">
+  <section class="p-row">
     <div class="p-step"><span class="p-num">1</span>{{ icon('step2') }}<p>{{ p.step_pass }}</p></div>
-    {{ icon('chevron', 'p-arrow icon-chevron') }}
+    {{ icon('chevron', 'p-arrow') }}
     <div class="p-step"><span class="p-num">2</span>{{ icon('step4') }}<p>{{ p.step_lid }}</p></div>
   </section>
 
@@ -35,9 +35,9 @@
   </section>
 
   <section class="p-scan">
-    <p class="p-scan-main">{{ icon('translate', 'p-scan-icon') }}<span>{{ nl_scan }}</span></p>
+    <p class="p-scan-main">{{ icon('translate', 'p-scan-icon') }}<span>{{ nl.poster_scan }}</span></p>
     <div class="p-scan-body">
-      <div class="qr" role="img" aria-label="QR-code naar {{ site_host }}">{{ qr_svg|safe }}</div>
+      <div class="qr" role="img" aria-label="QR-code naar {{ site_host }}">{{ qr_svg }}</div>
       <div class="p-scan-side">
         <p class="p-trust-title">{{ p.trust_title }}</p>
         <ul class="p-trust">
@@ -55,7 +55,11 @@
 
   <footer class="p-foot">
     <p>{{ p.disclaimer }}</p>
-    <p class="{{ '' if site.publisher else 'p-missing' }}">{% if site.publisher %}{{ p.publisher_label }} {{ site.publisher }}{% else %}{{ p.publisher_missing }}{% endif %}</p>
+    {% if site.publisher %}
+    <p>{{ p.publisher_label }} {{ site.publisher }}</p>
+    {% else %}
+    <p class="p-missing">{{ p.publisher_missing }}</p>
+    {% endif %}
   </footer>
 </div>
 {% endblock %}

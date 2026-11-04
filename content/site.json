@@ -1,17 +1,6 @@
 {
   "site_url": "https://heizijdse-velden.github.io/",
-  "languages": [
-    "nl",
-    "en",
-    "fr",
-    "ar",
-    "tr",
-    "pl",
-    "ro",
-    "bg",
-    "uk",
-    "es"
-  ],
+  "languages": ["nl", "en", "fr", "ar", "tr", "pl", "ro", "bg", "uk", "es"],
   "last_reviewed": "2026-11-04",
   "publisher": "Pieter Huycke",
   "maintainer_email": "burengroep.heizijdsevelden@proton.me",

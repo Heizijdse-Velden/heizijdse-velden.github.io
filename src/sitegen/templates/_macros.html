@@ -1,0 +1,18 @@
+{#- Snippets shared by the language chooser and the language pages. -#}
+{% from "_icons.html" import icon %}
+
+{#- "Free, no payment, no personal data, no tracking": shown before anything else. -#}
+{% macro trust(class='') %}
+<p class="trust{{ ' ' ~ class if class }}" role="note">
+  <span class="trust-icons" aria-hidden="true">{{ icon('nomoney') }}{{ icon('nodata') }}{{ icon('notrack') }}</span>
+  <span>{{ caller() }}</span>
+</p>
+{%- endmacro %}
+
+{#- Tells search engines and browsers which page is which language. -#}
+{% macro alternates(site, langs) %}
+{% for l in langs %}
+<link rel="alternate" hreflang="{{ l.code }}" href="{{ site.site_url }}{{ l.code }}/">
+{% endfor %}
+<link rel="alternate" hreflang="x-default" href="{{ site.site_url }}">
+{%- endmacro %}
