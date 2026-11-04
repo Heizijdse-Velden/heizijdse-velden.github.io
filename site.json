@@ -1,0 +1,62 @@
+{
+  "_uitleg": "Algemene instellingen. Pas site_url aan naar je echte GitHub Pages-adres VOOR je de affiche print: de QR-code wordt hieruit gemaakt.",
+
+  "site_url": "https://afval-turnhout.github.io/",
+  "default_lang": "nl",
+  "languages": ["nl", "en", "fr", "ar", "tr", "pl", "ro", "bg", "uk", "es"],
+  "last_reviewed": "2026-11-04",
+
+  "_uitleg_vu": "Verplicht op gedrukte affiches/flyers (Belgisch recht): naam en woonplaats van de verantwoordelijke uitgever (meerderjarige inwoner van België). Vul in voor je print.",
+  "publisher": "",
+
+  "maintainer_email": "",
+
+  "contacts": {
+    "containers": {
+      "email": "ondergronds@iok.be",
+      "phone": "014 53 53 22",
+      "phone_link": "+3214535322"
+    },
+    "pass": {
+      "email": "afvalbeheer@iok.be",
+      "phone": "014 53 53 53",
+      "phone_link": "+3214535353"
+    }
+  },
+
+  "links": {
+    "iok_containers": "https://www.iok.be/ondergrondse-containers",
+    "iok_manual_pdf": "https://www.iok.be/sites/default/files/2025-10/handleiding%20ondergrondse%20containers.pdf",
+    "iok_video": "https://www.youtube.com/watch?v=YCnC-hh5k2k",
+    "iok_prices": "https://www.iok.be/afval/wat-kost-mijn-afval",
+    "iok_recyclagepark": "https://www.iok.be/afval/mijn-recyclagepark",
+    "iok_contact": "https://www.iok.be/contact",
+    "mijndiftar": "https://www.mijndiftar.be"
+  },
+
+  "_uitleg_sorteergidsen": "Officiële IOK-sorteergidsen in andere talen (bron: https://www.iok.be/sorterenanderetalen). Per taal de juiste brochure.",
+  "_uitleg_termen": "Nederlandse woorden die in vertalingen letterlijk blijven staan (zoals tekst op het scherm van de container). Ze worden correct weergegeven in rechts-naar-links-talen.",
+  "dutch_terms": [
+    "welkom, bied je pas aan",
+    "pas geaccepteerd",
+    "toegangspas",
+    "restafval",
+    "papier en karton",
+    "sluikstorten",
+    "recyclagepark",
+    "Drankkartons"
+  ],
+
+  "sorting_guides": {
+    "nl": "https://www.iok.be/afval/afval-sorteren",
+    "en": "https://www.iok.be/brochure-nlfreng",
+    "fr": "https://www.iok.be/brochure-nlfreng",
+    "ar": "https://www.iok.be/brochure-nlturarab",
+    "tr": "https://www.iok.be/brochure-nlturarab",
+    "pl": "https://www.iok.be/brochure-nlplru",
+    "ro": "https://www.iok.be/brochure-nlrobg",
+    "bg": "https://www.iok.be/brochure-nlrobg",
+    "uk": "https://www.iok.be/brochure-nluken",
+    "es": "https://www.iok.be/brochure-nlptes"
+  }
+}

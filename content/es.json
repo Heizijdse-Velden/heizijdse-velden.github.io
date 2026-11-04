@@ -1,0 +1,123 @@
+{
+  "lang_name": "Español",
+  "dir": "ltr",
+  "is_translation": true,
+
+  "ui": {
+    "choose_language": "Elija su idioma",
+    "other_language": "Otro idioma",
+    "continue_in": "Continuar en español",
+    "official_info": "Información oficial de IOK",
+    "in_dutch": "en neerlandés",
+    "label_how": "¿Cómo?",
+    "label_yes": "Sí",
+    "label_no": "No",
+    "free": "Gratis",
+    "paid": "De pago",
+    "call": "Llamar",
+    "email": "Correo",
+    "last_reviewed": "Última revisión",
+    "link_recyclagepark": "Puntos limpios de IOK",
+    "link_prices": "Tarifas de IOK",
+    "link_mijndiftar": "Mi cuenta de residuos (mijndiftar.be)",
+    "link_manual": "Manual de IOK (PDF)",
+    "link_iok_page": "Página de IOK sobre los contenedores soterrados"
+  },
+
+  "page_title": "Contenedores de basura soterrados: cómo funcionan",
+  "intro": "En nuestro barrio hay contenedores de basura soterrados. Solo se abren con la tarjeta de acceso (toegangspas) de su vivienda. Aquí puede leer cómo usarlos.",
+  "translation_note": "Esta es una traducción voluntaria de la explicación oficial en neerlandés de IOK, la empresa de gestión de residuos. En caso de duda, prevalece el texto en neerlandés.",
+
+  "steps_title": "Cómo abrir el contenedor",
+  "steps": [
+    "Vaya al contenedor correcto. En la pantalla pone «welkom, bied je pas aan» (bienvenido, presente su tarjeta).",
+    "Mantenga la tarjeta de acceso debajo de la pantalla durante unos segundos.",
+    "En la pantalla pone «pas geaccepteerd» (tarjeta aceptada). Retire la tarjeta y dé un paso atrás.",
+    "La tapa se abre sola.",
+    "Tire la basura en el contenedor.",
+    "Cierre la tapa."
+  ],
+  "safety": "Cuidado: la tapa se abre sola. Mantenga la distancia y aleje a los niños de la tapa.",
+
+  "containers_title": "¿Qué va dónde?",
+  "containers_intro": "Todos los contenedores se abren con su tarjeta de acceso. Solo se paga por la basura general.",
+  "fractions": {
+    "rest": {
+      "name": "Basura general (restafval)",
+      "how": "En una bolsa cerrada de 30 litros como máximo. Sirve cualquier bolsa, si cabe por la abertura.",
+      "yes": "Los residuos que no se pueden separar.",
+      "no": "Nada de PMD, papel ni vidrio. Nada de objetos grandes, aparatos eléctricos, pilas, pintura ni productos químicos."
+    },
+    "pmd": {
+      "name": "PMD",
+      "subtitle": "Envases de Plástico, envases Metálicos y briks de bebidas (Drankkartons)",
+      "how": "Sueltos en el contenedor, no en una bolsa. Vacíe los envases y no los meta unos dentro de otros.",
+      "yes": "Botellas, frascos, tarrinas, bandejas, films y bolsas de plástico. Latas, latas de conserva, aerosoles, tapas y tapones. Briks de bebidas (leche, zumo).",
+      "no": "Nada de objetos de plástico que no sean envases (juguetes, cubos). Nada de envases de aceite de motor, pintura, pegamento, pesticidas o combustible."
+    },
+    "paper": {
+      "name": "Papel y cartón (papier en karton)",
+      "how": "Suelto en el contenedor, no en una bolsa. Doble o rompa las cajas en trozos pequeños.",
+      "yes": "Periódicos, revistas, folletos, cartas, sobres, libros, cajas de cartón, bolsas de papel del pan.",
+      "no": "Nada de papel sucio o grasiento (cajas de pizza, bandejas de patatas fritas). Nada de papel de cocina, pañuelos de papel, papel de aluminio ni papel pintado."
+    }
+  },
+
+  "never_title": "Nunca deje basura junto al contenedor",
+  "never_text": "Tampoco si el contenedor está lleno o averiado. Eso es vertido ilegal (sluikstorten): le pueden poner una multa elevada. Llévese la basura de vuelta a casa y avise del problema a IOK.",
+
+  "faq_title": "¿Qué hago si…",
+  "faq": {
+    "blocked": {
+      "q": "…el contenedor no se abre, está lleno o averiado?",
+      "a": "Llévese la basura de vuelta a casa. Avise del problema a IOK. IOK lo solucionará lo antes posible.",
+      "hours": "De lunes a viernes, de 8:00 a 16:00"
+    },
+    "lost": {
+      "q": "…he perdido mi tarjeta de acceso o está rota?",
+      "a": "Pida una tarjeta nueva a IOK. Una tarjeta nueva cuesta 5 euros.",
+      "hours": "De lunes a jueves de 8:30 a 16:30, viernes de 8:30 a 16:00"
+    },
+    "moved_in": {
+      "q": "…acabo de mudarme aquí y no tengo tarjeta?",
+      "a": "La tarjeta pertenece a la vivienda, no a la persona. Pida la tarjeta a su casero o al inquilino anterior. Registre su dirección en el ayuntamiento de Turnhout. ¿No hay tarjeta? Contacte con IOK."
+    },
+    "moving_out": {
+      "q": "…me mudo?",
+      "a": "Deje la tarjeta de acceso y el manual en la vivienda. Comunique su mudanza al ayuntamiento."
+    },
+    "bag": {
+      "q": "…mi bolsa no cabe por la abertura?",
+      "a": "Use una bolsa más pequeña, de 30 litros como máximo. Nunca deje la bolsa junto al contenedor."
+    },
+    "elsewhere": {
+      "q": "…tengo vidrio, objetos grandes, aparatos eléctricos o residuos químicos?",
+      "a": "No se permiten en estos contenedores. Llévelos al punto limpio (recyclagepark). Lleve su documento de identidad."
+    },
+    "cost": {
+      "q": "…quiero saber cuánto pago?",
+      "a": "La basura general cuesta un importe fijo cada vez que usa el contenedor. Se descuenta de la cuenta de residuos (DIFTAR) de su vivienda. El PMD y el papel son gratis."
+    }
+  },
+
+  "guide_title": "Guía de separación en su idioma",
+  "guide_text": "IOK tiene una guía oficial de separación de residuos en su idioma. Explica qué residuo va dónde. Atención: en los contenedores soterrados el PMD se tira suelto, no en una bolsa azul.",
+  "guide_link": "Guía de separación de IOK (neerlandés, portugués, español)",
+
+  "video_title": "Vea el vídeo",
+  "video_text": "IOK hizo un vídeo corto sobre cómo funcionan los contenedores (en neerlandés).",
+  "video_link": "Ver el vídeo (YouTube)",
+
+  "translate_title": "¿Su idioma no está aquí?",
+  "translate_intro": "Su teléfono puede traducir esta página:",
+  "translate_android": "Android (Chrome): toque ⋮ arriba a la derecha y elija «Traducir».",
+  "translate_iphone": "iPhone (Safari): toque el icono a la izquierda de la barra de direcciones y elija «Traducir».",
+  "translate_paper": "Papel (como el manual de IOK): abra la aplicación Google Traductor, elija «Cámara» y apunte la cámara al texto.",
+
+  "about_title": "Sobre esta web",
+  "about_text": "Es una iniciativa de voluntarios del barrio. No es una web oficial de IOK ni de la ciudad de Turnhout.",
+  "about_no_money": "Esta web nunca pide dinero, pagos ni datos personales. ¿Una página se lo pide? Entonces no es esta web: no confíe en ella.",
+  "about_privacy": "Sin cookies, sin seguimiento.",
+
+  "poster_scan": "Escanee para verlo en su idioma"
+}

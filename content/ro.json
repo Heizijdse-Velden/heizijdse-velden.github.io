@@ -1,0 +1,123 @@
+{
+  "lang_name": "Română",
+  "dir": "ltr",
+  "is_translation": true,
+
+  "ui": {
+    "choose_language": "Alegeți limba",
+    "other_language": "Altă limbă",
+    "continue_in": "Continuați în română",
+    "official_info": "Informații oficiale de la IOK",
+    "in_dutch": "în neerlandeză",
+    "label_how": "Cum?",
+    "label_yes": "Da",
+    "label_no": "Nu",
+    "free": "Gratuit",
+    "paid": "Cu plată",
+    "call": "Sunați",
+    "email": "E-mail",
+    "last_reviewed": "Ultima verificare",
+    "link_recyclagepark": "Centrele de reciclare IOK",
+    "link_prices": "Tarifele IOK",
+    "link_mijndiftar": "Contul meu de deșeuri (mijndiftar.be)",
+    "link_manual": "Ghidul IOK (PDF)",
+    "link_iok_page": "Pagina IOK despre containerele subterane"
+  },
+
+  "page_title": "Containere subterane pentru deșeuri: cum funcționează",
+  "intro": "În cartierul nostru există containere subterane pentru deșeuri. Ele se deschid doar cu cardul de acces (toegangspas) al locuinței dumneavoastră. Aici aflați cum să le folosiți.",
+  "translation_note": "Aceasta este o traducere făcută de voluntari a explicației oficiale în neerlandeză de la IOK, compania de gestionare a deșeurilor. În caz de îndoială, textul în neerlandeză este cel valabil.",
+
+  "steps_title": "Cum deschideți containerul",
+  "steps": [
+    "Mergeți la containerul potrivit. Pe ecran scrie „welkom, bied je pas aan” (bun venit, prezentați cardul).",
+    "Țineți cardul de acces sub ecran câteva secunde.",
+    "Pe ecran scrie „pas geaccepteerd” (card acceptat). Luați cardul și faceți un pas înapoi.",
+    "Capacul se deschide singur.",
+    "Aruncați deșeurile în container.",
+    "Închideți capacul."
+  ],
+  "safety": "Atenție: capacul se deschide singur. Păstrați distanța și țineți copiii departe de capac.",
+
+  "containers_title": "Ce aruncați și unde?",
+  "containers_intro": "Toate containerele se deschid cu cardul de acces. Doar deșeurile reziduale se plătesc.",
+  "fractions": {
+    "rest": {
+      "name": "Deșeuri reziduale (restafval)",
+      "how": "Într-un sac închis de maximum 30 de litri. Orice fel de sac este bun, dacă încape prin deschizătură.",
+      "yes": "Deșeurile pe care nu le puteți sorta.",
+      "no": "Fără PMD, hârtie sau sticlă. Fără obiecte mari, aparate electrice, baterii, vopsea sau produse chimice."
+    },
+    "pmd": {
+      "name": "PMD",
+      "subtitle": "Ambalaje din Plastic, ambalaje Metalice și cutii de băuturi (Drankkartons)",
+      "how": "Vrac în container, nu în sac. Goliți ambalajele și nu le puneți unul în altul.",
+      "yes": "Sticle, flacoane, borcănele, caserole, folii și pungi din plastic. Doze, conserve, spray-uri, capace și dopuri. Cutii de băuturi (lapte, suc).",
+      "no": "Fără obiecte din plastic care nu sunt ambalaje (jucării, găleți). Fără ambalaje de ulei de motor, vopsea, adeziv, pesticide sau combustibil."
+    },
+    "paper": {
+      "name": "Hârtie și carton (papier en karton)",
+      "how": "Vrac în container, nu în sac. Pliați sau rupeți cutiile în bucăți mici.",
+      "yes": "Ziare, reviste, pliante, scrisori, plicuri, cărți, cutii de carton, pungi de hârtie pentru pâine.",
+      "no": "Fără hârtie murdară sau unsuroasă (cutii de pizza, caserole de cartofi prăjiți). Fără prosoape de hârtie, șervețele, folie de aluminiu sau tapet."
+    }
+  },
+
+  "never_title": "Nu lăsați niciodată deșeuri lângă container",
+  "never_text": "Nici dacă containerul este plin sau defect. Aceasta este depozitare ilegală (sluikstorten): puteți primi o amendă mare. Luați deșeurile înapoi acasă și anunțați problema la IOK.",
+
+  "faq_title": "Ce faceți dacă…",
+  "faq": {
+    "blocked": {
+      "q": "…containerul nu se deschide, este plin sau defect?",
+      "a": "Luați deșeurile înapoi acasă. Anunțați problema la IOK. IOK o rezolvă cât mai repede.",
+      "hours": "De luni până vineri, 8:00–16:00"
+    },
+    "lost": {
+      "q": "…ați pierdut cardul de acces sau s-a stricat?",
+      "a": "Cereți un card nou de la IOK. Un card nou costă 5 euro.",
+      "hours": "De luni până joi 8:30–16:30, vineri 8:30–16:00"
+    },
+    "moved_in": {
+      "q": "…tocmai v-ați mutat aici și nu aveți card?",
+      "a": "Cardul aparține locuinței, nu persoanei. Cereți cardul proprietarului sau fostului locatar. Înregistrați-vă adresa la primăria Turnhout. Nu există card? Contactați IOK."
+    },
+    "moving_out": {
+      "q": "…vă mutați?",
+      "a": "Lăsați cardul de acces și ghidul în locuință. Anunțați mutarea la primărie."
+    },
+    "bag": {
+      "q": "…sacul nu încape prin deschizătură?",
+      "a": "Folosiți un sac mai mic, de maximum 30 de litri. Nu puneți niciodată sacul lângă container."
+    },
+    "elsewhere": {
+      "q": "…aveți sticlă, obiecte mari, aparate electrice sau deșeuri chimice?",
+      "a": "Acestea nu sunt permise în aceste containere. Duceți-le la centrul de reciclare (recyclagepark). Luați cu dumneavoastră cartea de identitate."
+    },
+    "cost": {
+      "q": "…vreți să știți cât plătiți?",
+      "a": "Deșeurile reziduale costă o sumă fixă de fiecare dată când folosiți containerul. Suma se retrage din contul de deșeuri (DIFTAR) al locuinței. PMD și hârtia sunt gratuite."
+    }
+  },
+
+  "guide_title": "Ghid de sortare în limba dumneavoastră",
+  "guide_text": "IOK are un ghid oficial de sortare în limba dumneavoastră. Explică unde merge fiecare tip de deșeu. Atenție: la containerele subterane, PMD se aruncă vrac, nu într-un sac albastru.",
+  "guide_link": "Ghidul de sortare IOK (neerlandeză, română, bulgară)",
+
+  "video_title": "Urmăriți filmulețul",
+  "video_text": "IOK a făcut un filmuleț scurt despre cum funcționează containerele (în neerlandeză).",
+  "video_link": "Urmăriți filmulețul (YouTube)",
+
+  "translate_title": "Limba dumneavoastră nu este aici?",
+  "translate_intro": "Telefonul dumneavoastră poate traduce această pagină:",
+  "translate_android": "Android (Chrome): atingeți ⋮ din dreapta sus și alegeți „Traduceți”.",
+  "translate_iphone": "iPhone (Safari): atingeți pictograma din stânga barei de adrese și alegeți „Traduceți”.",
+  "translate_paper": "Hârtie (cum ar fi ghidul IOK): deschideți aplicația Google Traducere, alegeți „Cameră” și îndreptați camera spre text.",
+
+  "about_title": "Despre acest site",
+  "about_text": "Aceasta este o inițiativă a voluntarilor din cartier. Nu este un site oficial al IOK sau al orașului Turnhout.",
+  "about_no_money": "Acest site nu cere niciodată bani, plăți sau date personale. O pagină vă cere asta? Atunci nu este acest site: nu aveți încredere în ea.",
+  "about_privacy": "Fără cookie-uri, fără urmărire.",
+
+  "poster_scan": "Scanați pentru explicații în limba dvs."
+}

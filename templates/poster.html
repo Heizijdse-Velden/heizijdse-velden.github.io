@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block title %}Affiche · {{ p.title }}{% endblock %}
+{% block description %}Printbare A4-affiche met QR-code.{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ root }}static/poster.css?v={{ build_id }}">{% endblock %}
+{% block bodyclass %}poster-page{% endblock %}
+{% block body %}
+<p class="print-hint">Afdrukken: A4, staand, marges „geen”, achtergrondafbeeldingen aan. Controleer eerst of de QR-code naar <strong>{{ site_host }}</strong> leidt.</p>
+<div class="sheet">
+  <header class="p-head">
+    <div>
+      <h1>{{ p.title }}</h1>
+      <p class="p-sub">{{ p.subtitle }}</p>
+    </div>
+  </header>
+
+  <section class="p-row p-open">
+    <div class="p-step"><span class="p-num">1</span>{{ icon('step2') }}<p>{{ p.step_pass }}</p></div>
+    {{ icon('chevron', 'p-arrow icon-chevron') }}
+    <div class="p-step"><span class="p-num">2</span>{{ icon('step4') }}<p>{{ p.step_lid }}</p></div>
+  </section>
+
+  <section class="p-row p-fractions">
+    <div class="p-frac p-frac-rest">{{ icon('rest') }}<h2>{{ p.rest_name }}</h2><p>{{ p.rest_rule }}</p><span class="p-badge">€</span></div>
+    <div class="p-frac p-frac-pmd">{{ icon('pmd') }}<h2>{{ p.pmd_name }}</h2><p>{{ p.pmd_rule }}</p></div>
+    <div class="p-frac p-frac-paper">{{ icon('paper') }}<h2>{{ p.paper_name }}</h2><p>{{ p.paper_rule }}</p></div>
+  </section>
+
+  <section class="p-never">
+    {{ icon('nodump') }}
+    <div>
+      <h2>{{ p.never_title }}</h2>
+      <p>{{ p.never_text }} <strong class="nowrap">{{ site.contacts.containers.phone }}</strong></p>
+    </div>
+  </section>
+
+  <section class="p-qr">
+    <div class="qr" role="img" aria-label="QR-code naar {{ site_host }}">{{ qr_svg|safe }}</div>
+    <div class="p-qr-text">
+      <p class="p-scan-main">{{ icon('translate', 'p-scan-icon') }}<span>{{ nl_scan }}</span></p>
+      <ul class="p-scan-list">
+        {% for l in langs if l.code != 'nl' %}<li lang="{{ l.code }}" dir="{{ l.dir }}">{{ l.poster_scan }}</li>{% endfor %}
+      </ul>
+      <p class="p-url">{{ site_host }}</p>
+    </div>
+  </section>
+
+  <footer class="p-foot">
+    <p>{{ p.disclaimer }}</p>
+    <p class="{{ '' if site.publisher else 'p-missing' }}">{% if site.publisher %}{{ p.publisher_label }} {{ site.publisher }}{% else %}{{ p.publisher_missing }}{% endif %}</p>
+  </footer>
+</div>
+{% endblock %}

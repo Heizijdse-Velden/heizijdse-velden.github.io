@@ -1,0 +1,18 @@
+{
+  "_uitleg": "Teksten voor de affiche (Nederlands). De zin 'Scan voor uitleg in jouw taal' komt uit elk taalbestand (poster_scan).",
+  "title": "Ondergrondse containers",
+  "subtitle": "Zo werkt het",
+  "step_pass": "Houd je pas onder het scherm",
+  "step_lid": "Het deksel gaat vanzelf open",
+  "rest_name": "Restafval",
+  "rest_rule": "Gesloten zak, max. 30 liter",
+  "pmd_name": "PMD",
+  "pmd_rule": "Los, niet in een zak",
+  "paper_name": "Papier en karton",
+  "paper_rule": "Los, dozen klein plooien",
+  "never_title": "Nooit afval naast de container!",
+  "never_text": "Vol of kapot? Neem je afval terug mee naar huis en meld het aan IOK:",
+  "disclaimer": "Initiatief van vrijwilligers uit de buurt, geen officiële affiche van IOK. Deze website vraagt nooit om geld of persoonlijke gegevens.",
+  "publisher_label": "V.U.:",
+  "publisher_missing": "[V.U.: naam en adres invullen in site.json]"
+}

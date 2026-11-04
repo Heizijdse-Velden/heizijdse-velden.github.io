@@ -1,0 +1,123 @@
+{
+  "lang_name": "English",
+  "dir": "ltr",
+  "is_translation": true,
+
+  "ui": {
+    "choose_language": "Choose your language",
+    "other_language": "Other language",
+    "continue_in": "Continue in English",
+    "official_info": "Official information from IOK",
+    "in_dutch": "in Dutch",
+    "label_how": "How?",
+    "label_yes": "Yes",
+    "label_no": "No",
+    "free": "Free",
+    "paid": "You pay",
+    "call": "Call",
+    "email": "Email",
+    "last_reviewed": "Last checked",
+    "link_recyclagepark": "IOK recycling parks",
+    "link_prices": "IOK prices",
+    "link_mijndiftar": "My waste account (mijndiftar.be)",
+    "link_manual": "IOK manual (PDF)",
+    "link_iok_page": "IOK page about underground containers"
+  },
+
+  "page_title": "Underground waste containers: how they work",
+  "intro": "Our neighbourhood has underground waste containers. They only open with the access card (toegangspas) of your home. Here you can read how to use them.",
+  "translation_note": "This is a volunteer translation of the official Dutch explanation by IOK, the waste company. If in doubt, the Dutch text applies.",
+
+  "steps_title": "How to open the container",
+  "steps": [
+    "Go to the right container. The screen says “welkom, bied je pas aan” (welcome, show your card).",
+    "Hold your access card under the screen for a few seconds.",
+    "The screen says “pas geaccepteerd” (card accepted). Take your card away and take a step back.",
+    "The lid opens by itself.",
+    "Put your waste in the container.",
+    "Close the lid."
+  ],
+  "safety": "Careful: the lid opens by itself. Keep your distance and keep children away from the lid.",
+
+  "containers_title": "What goes where?",
+  "containers_intro": "All containers open with your access card. Only general waste costs money.",
+  "fractions": {
+    "rest": {
+      "name": "General waste (restafval)",
+      "how": "In a closed bag of maximum 30 litres. Any kind of bag is fine, as long as it fits through the opening.",
+      "yes": "Waste that you cannot sort.",
+      "no": "No PMD, paper or glass. No large objects, electrical appliances, batteries, paint or chemical products."
+    },
+    "pmd": {
+      "name": "PMD",
+      "subtitle": "Plastic packaging, Metal packaging and Drink cartons",
+      "how": "Loose in the container, not in a bag. Empty the packaging and do not put items inside each other.",
+      "yes": "Plastic bottles, flasks, pots, trays, films and bags. Cans, tins, aerosol cans, lids and caps. Drink cartons (milk, juice).",
+      "no": "No plastic objects that are not packaging (toys, buckets). No packaging of motor oil, paint, glue, pesticides or fuel."
+    },
+    "paper": {
+      "name": "Paper and cardboard (papier en karton)",
+      "how": "Loose in the container, not in a bag. Fold or tear boxes into small pieces.",
+      "yes": "Newspapers, magazines, leaflets, letters, envelopes, books, cardboard boxes, paper bread bags.",
+      "no": "No dirty or greasy paper (pizza boxes, chip trays). No kitchen paper, tissues, aluminium foil or wallpaper."
+    }
+  },
+
+  "never_title": "Never leave waste next to the container",
+  "never_text": "Not even when the container is full or broken. That is illegal dumping (sluikstorten): you can get a heavy fine. Take your waste back home and report the problem to IOK.",
+
+  "faq_title": "What if…",
+  "faq": {
+    "blocked": {
+      "q": "…the container does not open, is full or is broken?",
+      "a": "Take your waste back home. Report the problem to IOK. IOK will fix it as soon as possible.",
+      "hours": "Monday to Friday, 8:00 to 16:00"
+    },
+    "lost": {
+      "q": "…I lost my access card or it is broken?",
+      "a": "Ask IOK for a new card. A new card costs 5 euros.",
+      "hours": "Monday to Thursday 8:30 to 16:30, Friday 8:30 to 16:00"
+    },
+    "moved_in": {
+      "q": "…I just moved here and have no card?",
+      "a": "The card belongs to the home, not to the person. Ask your landlord or the previous resident for the card. Register your address with the city of Turnhout. No card? Contact IOK."
+    },
+    "moving_out": {
+      "q": "…I am moving out?",
+      "a": "Leave the access card and the manual in the home. Report your move to the city."
+    },
+    "bag": {
+      "q": "…my bag does not fit through the opening?",
+      "a": "Use a smaller bag, of maximum 30 litres. Never put the bag next to the container."
+    },
+    "elsewhere": {
+      "q": "…I have glass, large objects, electrical appliances or chemical waste?",
+      "a": "These are not allowed in these containers. Take them to the recycling park (recyclagepark). Bring your identity card."
+    },
+    "cost": {
+      "q": "…I want to know what I pay?",
+      "a": "General waste costs a fixed amount each time you use the container. It is taken from the waste account (DIFTAR) of your home. PMD and paper are free."
+    }
+  },
+
+  "guide_title": "Sorting guide in your language",
+  "guide_text": "IOK has an official sorting guide in your language. It explains which waste goes where. Note: at the underground containers, you put PMD in loose, not in a blue bag.",
+  "guide_link": "IOK sorting guide (Dutch, French, English)",
+
+  "video_title": "Watch the video",
+  "video_text": "IOK made a short video about how the containers work (in Dutch).",
+  "video_link": "Watch the video (YouTube)",
+
+  "translate_title": "Is your language not here?",
+  "translate_intro": "Your phone can translate this page:",
+  "translate_android": "Android (Chrome): tap ⋮ at the top right and choose “Translate”.",
+  "translate_iphone": "iPhone (Safari): tap the icon on the left of the address bar and choose “Translate”.",
+  "translate_paper": "Paper (like the IOK manual): open the Google Translate app, choose “Camera” and point your camera at the text.",
+
+  "about_title": "About this website",
+  "about_text": "This is an initiative by volunteers from the neighbourhood. It is not an official website of IOK or the city of Turnhout.",
+  "about_no_money": "This website never asks for money, a payment or personal data. Does a page ask for that? Then it is not this website: do not trust it.",
+  "about_privacy": "No cookies, no tracking.",
+
+  "poster_scan": "Scan for your language"
+}
